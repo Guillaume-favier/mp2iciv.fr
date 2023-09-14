@@ -8,16 +8,20 @@ const conHeure = (n) => {
 }
 
 jours = ["", "lundi", "mardi", "mercredi", "jeudi", "vendredi"]
+
 async function getJson(url) {
     const response = await fetch(url);
     const jj = await response.json();
     return jj
 }
+
+
 async function getText(url) {
     const response = await fetch(url);
     const txt = await response.text();
     return txt
 }
+
 
 const backHour = (n) => {
     let reste = n - Math.floor(n)
@@ -47,12 +51,12 @@ for (let i = 3; i < 19; i++) {
 ; (async () => {
 
     var txt = document.getElementById("outTxt")
-    txt.innerText = "Chargement des donnÃ©es..."
+    txt.innerText = "Chargement des données..."
     const db = await getJson("/kholes.json")
     const info = await getText("/info.txt")
     const orgEDT = await getJson("/EDT.json")
     let EDT = structuredClone(orgEDT)
-    txt.innerHTML = "Traitement des donnÃ©es ..."
+    txt.innerHTML = "Traitement des données ..."
     let ninfo = []
     info.split("\n").forEach(lign => {
         ninfo.push(lign.split(" "))
@@ -62,6 +66,7 @@ for (let i = 3; i < 19; i++) {
     let groupeK = 0;
     let groupeI = 0;
     let semaine = 3;
+    let CKh = 0;
     let kholes = []
     for (let i = 0; i < 17; i++) {
         kholes.push([]);
@@ -69,7 +74,7 @@ for (let i = 3; i < 19; i++) {
 
     const afficheCours = (m, nom) => {
         const p = document.createElement("p")
-        p.innerText = nom + ", " + m[0] + " le " + jours[m[1]] + " Ã  " + (typeof m[2] == typeof 2 ? (m[2] + "h") : m[2]) + " en " + m[3]
+        p.innerText = nom + ", " + m[0] + " le " + jours[m[1]] + " à  " + (typeof m[2] == typeof 2 ? (m[2] + "h") : m[2]) + " en " + m[3]
         txt.appendChild(p)
     }
     const getKholes = (c, s) => {
@@ -110,7 +115,7 @@ for (let i = 3; i < 19; i++) {
         }
         if ((s % 2 == 0 && (c == 2 || c == 5)) || (s % 2 == 1 && (c == 9 || c == 14))) {
             // console.log("test")
-            afficheCours(db["francais"][c - 1], "FranÃ§ais")
+            afficheCours(db["francais"][c - 1], "Français")
         }
     }
     txt.innerHTML = "Choisir un groupe"
@@ -123,40 +128,65 @@ for (let i = 3; i < 19; i++) {
 
         const vendrediAMrtrre = []
         const lundiAMettre = []
+
+        const n1 = () => {
+            vendrediAMrtrre.push(["TD Maths", "20", 8, 10])
+            vendrediAMrtrre.push(["TP Physique", "B214", 10, 12])
+
+            lundiAMettre.push(["Anglais", "jsp", 13, 14])
+            lundiAMettre.push(["TD Physique", "20", 14, 16])
+        }
+
+        const n2 = () => {
+            vendrediAMrtrre.push(["TD Maths", "20", 10, 12])
+            vendrediAMrtrre.push(["TP Physique", "B214", 8, 10])
+
+            lundiAMettre.push(["Anglais", "jsp", 14, 15])
+            lundiAMettre.push(["TD Physique", "20", 12, 14])
+        }
+        console.log("khlh",kholes[semaine])
+        const toCheck = kholes[semaine - 3]
         if (semaine % 2 == 1) {
 
             if (groupeK % 2 == 1) {
-                vendrediAMrtrre.push(["TD Maths", "20", 8, 10])
-                vendrediAMrtrre.push(["TP Physique", "B214", 10, 12])
+                if (toCheck == 5) {
+                    alert(1)
+                    lundiAMettre.push(["TD SI", "20", 10, 11])
+                }
+                else lundiAMettre.push(["TD SI", "20", 9, 10])
+                n1()
+                
 
-                lundiAMettre.push(["TD SI", "20", 9, 10])
-                lundiAMettre.push(["Anglais", "jsp", 13, 14])
-                lundiAMettre.push(["TD Physique", "20", 14, 16])
+                
             } else {
-                vendrediAMrtrre.push(["TD Maths", "20", 10, 12])
-                vendrediAMrtrre.push(["TP Physique", "B214", 8, 10])
-
-                lundiAMettre.push(["TD SI", "20", 10, 11])
-                lundiAMettre.push(["Anglais", "jsp", 14, 15])
-                lundiAMettre.push(["TD Physique", "20", 12, 14])
+                if (toCheck == 6) {
+                    alert(2)
+                    lundiAMettre.push(["TD SI", "20", 9, 10])
+                }
+                else lundiAMettre.push(["TD SI", "20", 10, 11])
+                n2()
+                
                 console.log(lundiAMettre)
             }
         } else {
             console.log("test3")
             if (groupeK % 2 == 1) {
-                vendrediAMrtrre.push(["TD Maths", "20", 10, 12])
-                vendrediAMrtrre.push(["TP Physique", "B214", 8, 10])
+                
+                if (toCheck == 6) {
+                    alert(3)
+                    lundiAMettre.push(["TD SI", "20", 9, 10])
+                }
+                else lundiAMettre.push(["TD SI", "20", 10, 11])
 
-                lundiAMettre.push(["TD SI", "20", 10, 11])
-                lundiAMettre.push(["Anglais", "jsp", 14, 15])
-                lundiAMettre.push(["TD Physique", "20", 12, 14])
+                n2()
             } else {
-                vendrediAMrtrre.push(["TD Maths", "20", 8, 10])
-                vendrediAMrtrre.push(["TP Physique", "B214", 10, 12])
+                if (toCheck == 5) {
+                    alert(4)
+                    lundiAMettre.push(["TD SI", "20", 10, 11])
+                }
+                else lundiAMettre.push(["TD SI", "20", 9, 10])
 
-                lundiAMettre.push(["TD SI", "20", 9, 10])
-                lundiAMettre.push(["Anglais", "jsp", 13, 14])
-                lundiAMettre.push(["TD Physique", "20", 14, 16])
+                n1()
             }
         }
         console.log(lundiAMettre)
@@ -199,7 +229,6 @@ for (let i = 3; i < 19; i++) {
         } if (groupeI == 3 || groupeI == "S") {
             cou = ["Info", "37", 16, 18]
             let bon = false;
-            console.log(cou)
             EDT[2].forEach((e, i) => {
                 if (bon) return
                 if (e[2] > cou[2]) {
@@ -211,9 +240,8 @@ for (let i = 3; i < 19; i++) {
             if (bon == false) {
                 EDT[2].push(cou)
             }
-            console.log("mercre", EDT[3])
         }
-        if (groupeI == "S") alert("Il faut se rÃ©partir les groupes d'info !")
+        if (groupeI == "S") alert("Il faut se répartir les groupes d'info !")
         console.log("STOP", mardi)
         mardi.forEach(cou => {
             let bon = false;
@@ -235,7 +263,7 @@ for (let i = 3; i < 19; i++) {
         const matiere = getKholes((16 - (semaine - 3) + Number(groupeK) - 1) % 16 + 1, (semaine - 3));
         matiere.forEach(kh => {
             let bon = false;
-            const val = ["KhÃ´le " + kh[4], kh[3], conHeure(kh[2]), conHeure(kh[2]) + 1]
+            const val = ["Khôle " + kh[4], kh[3], conHeure(kh[2]), conHeure(kh[2]) + 1]
             // console.log(EDT, kh)
             EDT[kh[1] - 1].forEach((e, i) => {
                 if (bon) return
@@ -309,37 +337,55 @@ for (let i = 3; i < 19; i++) {
         }
 
     }
-    semaines.onchange = e => {
-        semaine = e.target.value;
-        if (testparams() == false) {
-            txt.innerText = "ParamÃ¨tres invalides"
+
+    const updateSemaines = () => {
+        if (groupeK == "") {
+            txt.innerText = "Paramètres invalides"
             return
         }
         groupeI = ninfo[groupeK - 1][semaine - 3]
+        if (semaine > 18) semaine = 3
+        if (semaine < 3) semaine = 18
+        semaines.value = semaine
+        for (let i = 0; i < 16; i++) {
+            kholes[i] = (16 - i + Number(groupeK) - 1) % 16 + 1;
+
+        }
+        txt.innerHTML = ""
+        afficheSemaine(kholes[semaine - 3], semaine - 3)
+        if (testparams() == false) return
         afficheEDT()
     }
+
+    semaines.onchange = e => {
+        semaine = e.target.value;
+        if (testparams() == false) {
+            txt.innerText = "Paramètres invalides"
+            return
+        }
+        updateSemaines()
+    }
+    document.getElementById("nextWeek").onclick = e=> {
+        e.preventDefault()
+        semaine++
+        updateSemaines()
+    }
+
+    document.getElementById("prevWeek").onclick = e => {
+        e.preventDefault()
+        semaine--
+        updateSemaines()
+    }
+
 
 
     selectGrp.onchange = e => {
         resetEDT()
         groupeK = Number(e.target.value)
-        if (groupeK == "") {
-            txt.innerText = "ParamÃ¨tres invalides"
-            return
-        }
-        groupeI = ninfo[groupeK - 1][semaine - 3]
+        
+        
 
-        txt.innerHTML = ""
-        console.log("groupe :", e.target.value)
-
-        for (let i = 0; i < 16; i++) {
-            kholes[i] = (16 - i + Number(e.target.value) - 1) % 16 + 1;
-            console.log(kholes[i])
-
-        }
-        afficheSemaine(kholes[semaine - 3], semaine - 3)
-        if (testparams() == false) return
-        afficheEDT()
+        updateSemaines()
 
     }
     // console.log(info)
