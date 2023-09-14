@@ -150,7 +150,6 @@ for (let i = 3; i < 19; i++) {
 
             if (groupeK % 2 == 1) {
                 if (toCheck == 5) {
-                    alert(1)
                     lundiAMettre.push(["TD SI", "20", 10, 11])
                 }
                 else lundiAMettre.push(["TD SI", "20", 9, 10])
@@ -160,7 +159,6 @@ for (let i = 3; i < 19; i++) {
                 
             } else {
                 if (toCheck == 6) {
-                    alert(2)
                     lundiAMettre.push(["TD SI", "20", 9, 10])
                 }
                 else lundiAMettre.push(["TD SI", "20", 10, 11])
@@ -173,7 +171,6 @@ for (let i = 3; i < 19; i++) {
             if (groupeK % 2 == 1) {
                 
                 if (toCheck == 6) {
-                    alert(3)
                     lundiAMettre.push(["TD SI", "20", 9, 10])
                 }
                 else lundiAMettre.push(["TD SI", "20", 10, 11])
@@ -181,7 +178,6 @@ for (let i = 3; i < 19; i++) {
                 n2()
             } else {
                 if (toCheck == 5) {
-                    alert(4)
                     lundiAMettre.push(["TD SI", "20", 10, 11])
                 }
                 else lundiAMettre.push(["TD SI", "20", 9, 10])
