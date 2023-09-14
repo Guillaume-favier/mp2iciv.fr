@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>khôlles</title>
+    <style>
+        table, tbody{
+            min-width: 50%;
+        }
+        tr{
+            width: 100%;
+            border: 1px solid black;
+
+        }td{
+            min-height: 70px;
+        }
+        .heure{
+            vertical-align: top;
+        }
+        .cours{
+            border: 1px solid black;
+        }.hid{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <label>
+            Groupe de khôlle
+            <select id="grpKhole">
+                <option value="">-- Choisis un groupe de khôlle --</option>
+            </select>
+        </label>
+        <br>
+        <label>
+            Semaine
+            <select id="semaine"></select>
+        </label>
+    </form>
+    <table id="tocopy">
+        <tbody id="EDT">
+            <tr >
+                <th>Heure</th>
+                <th>Lundi</th>
+                <th>Mardi</th>
+                <th>Mercredi</th>
+                <th>Jeudi</th>
+                <th>Vendredi</th>
+            </tr>
+        </tbody>
+        
+    </table>
+    <table class="hid">
+        <tbody id="EDT2">
+            <tr>
+                <th>Heure</th>
+                <th>Lundi</th>
+                <th>Mardi</th>
+                <th>Mercredi</th>
+                <th>Jeudi</th>
+                <th>Vendredi</th>
+            </tr>
+        </tbody>
+    
+    </table>
+    <div id="outTxt"></div>
+</body>
+<script src="/index.js">
+</script>
+</html>
