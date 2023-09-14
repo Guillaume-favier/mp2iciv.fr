@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>khôlles</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+        *, body{
+            font-family: 'Open Sans', sans-serif;
+        }
         table, tbody{
             min-width: 50%;
         }
@@ -19,6 +23,8 @@
             vertical-align: top;
         }
         .cours{
+            height: 50px;
+            text-align: center;
             border: 1px solid black;
         }.hid{
             display: none;
@@ -26,21 +32,25 @@
     </style>
 </head>
 <body>
-    <form>
-        <label>
-            Groupe de khôlle
-            <select id="grpKhole">
-                <option value="">-- Choisis un groupe de khôlle --</option>
-            </select>
-        </label>
-        <br>
-        <button id="prevWeek"> < </button>
-        <label>
-            Semaine
-            <select id="semaine"></select>
-        </label>
-        <button id="nextWeek"> > </button>
-    </form>
+    <center>
+        <h1>Emplois du temps MP2I</h1>
+        <h2>Attention revérifiez bien que vous avez bien tout vos cours, si le site bug et ne vous affiche pas les bons cours où en oublie. Moi (Guillaume Favier) ne se tient en aucun cas responsable</h2>
+        <form>
+            <label>
+                Groupe de khôlle
+                <select id="grpKhole">
+                    <option value="">-- Choisis un groupe de khôlle --</option>
+                </select>
+            </label>
+            <br>
+            <button id="prevWeek"> < </button>
+            <label>
+                Semaine
+                <select id="semaine"></select>
+            </label>
+            <button id="nextWeek"> > </button>
+        </form>
+    </center>
     <table id="tocopy">
         <tbody id="EDT">
             <tr >
