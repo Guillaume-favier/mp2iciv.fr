@@ -53,6 +53,7 @@ for (let i = 3; i < 19; i++) {
     var txt = document.getElementById("outTxt")
     txt.innerText = "Chargement des données..."
     const db = await getJson("/EDT/kholes.json")
+    const ds = await getJson("/EDT/DS.json")
     const info = await getText("/EDT/info.txt")
     const orgEDT = await getJson("/EDT/EDT.json")
     let EDT = structuredClone(orgEDT)
@@ -66,6 +67,7 @@ for (let i = 3; i < 19; i++) {
     let groupeK = 0;
     let groupeI = 0;
     let semaine = 3;
+    semaines.value = semaine
     let CKh = 0;
     let kholes = []
     for (let i = 0; i < 17; i++) {
@@ -104,6 +106,15 @@ for (let i = 3; i < 19; i++) {
         h1.innerText = "Semaine " + (s + 3) + " C" + c
         txt.appendChild(h1)
 
+        const dsP = document.createElement("p")
+        const inputDs = ds[semaine - 2]
+        dsP.innerText = "DS : " + (typeof (inputDs) != "undefined" ? inputDs : "Non défini")
+        txt.appendChild(dsP)
+        txt.appendChild(document.createElement("br"))
+
+        const kholesTexte = document.createElement("p")
+        kholesTexte.innerText = "Kôlles :"
+        txt.appendChild(kholesTexte)
         afficheCours(db["maths"][c - 1], "Maths")
         if (c % 2 == 1) {
             afficheCours(db["physique"][c - 1], "Physique")
@@ -259,7 +270,7 @@ for (let i = 3; i < 19; i++) {
         const matiere = getKholes((16 - (semaine - 3) + Number(groupeK) - 1) % 16 + 1, (semaine - 3));
         matiere.forEach(kh => {
             let bon = false;
-            const val = ["Khôle " + kh[4], kh[3], conHeure(kh[2]), conHeure(kh[2]) + 1]
+            const val = ["Khôlle " + kh[4], kh[3], conHeure(kh[2]), conHeure(kh[2]) + 1]
             // console.log(EDT, kh)
             EDT[kh[1] - 1].forEach((e, i) => {
                 if (bon) return
@@ -345,10 +356,10 @@ for (let i = 3; i < 19; i++) {
         semaines.value = semaine
         for (let i = 0; i < 16; i++) {
             kholes[i] = (16 - i + Number(groupeK) - 1) % 16 + 1;
-
         }
         txt.innerHTML = ""
         afficheSemaine(kholes[semaine - 3], semaine - 3)
+
         if (testparams() == false) return
         afficheEDT()
     }
