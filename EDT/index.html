@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emplois du temps - Mp2i civ</title>
+    <link href="/general.css" rel="stylesheet" />
+    <link href="/EDT/index.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="/nav/nav.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="topnav" id="myTopnav">
+        <a href="/">Acceuil</a>
+        <a href="/EDT/" class="active">EDT</a>
+        <a href="/ressources/">Ressources</a>
+        <a href="/HOF/">Hall of fame</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <center>
+        <h1 class="beau">Emplois du temps MP2I</h1>
+        <div class="content">
+
+            <h2>Attention revérifiez bien que vous avez bien tout vos cours, si le site bug et ne vous affiche pas les bons cours où en oublie. Moi (Guillaume Favier) ne se tient en aucun cas responsable</h2>
+            <form>
+                <label>
+                    Groupe de khôlle
+                    <select id="grpKhole">
+                        <option value="">-- Choisis un groupe de khôlle --</option>
+                    </select>
+                </label>
+                <br>
+                <button id="prevWeek"> < </button>
+                <label>
+                    Semaine
+                    <select id="semaine"></select>
+                </label>
+                <button id="nextWeek"> > </button>
+            </form>
+        </div>
+    
+        <table id="tocopy">
+            <tbody id="EDT">
+                <tr >
+                    <th>Heure</th>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                </tr>
+            </tbody>
+            
+        </table>
+        <table class="hid">
+            <tbody id="EDT2">
+                <tr>
+                    <th>Heure</th>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                </tr>
+            </tbody>
+            
+        </table>
+    </center>
+    <div id="outTxt"></div>
+</body>
+<script src="/nav/nav.js"></script>
+<script src="/EDT/index.js">
+</script>
+</html>

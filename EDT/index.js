@@ -52,9 +52,9 @@ for (let i = 3; i < 19; i++) {
 
     var txt = document.getElementById("outTxt")
     txt.innerText = "Chargement des données..."
-    const db = await getJson("/kholes.json")
-    const info = await getText("/info.txt")
-    const orgEDT = await getJson("/EDT.json")
+    const db = await getJson("/EDT/kholes.json")
+    const info = await getText("/EDT/info.txt")
+    const orgEDT = await getJson("/EDT/EDT.json")
     let EDT = structuredClone(orgEDT)
     txt.innerHTML = "Traitement des données ..."
     let ninfo = []

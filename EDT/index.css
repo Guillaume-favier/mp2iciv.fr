@@ -1,0 +1,29 @@
+table,
+tbody {
+    min-width: 50%;
+}
+
+tr {
+    width: 100%;
+    border: 1px solid black;
+
+}
+
+td {
+    min-height: 15%;
+    min-width: 18%;
+}
+
+.heure {
+    vertical-align: top;
+}
+
+.cours {
+    height: 50px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.hid {
+    display: none;
+}
