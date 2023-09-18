@@ -144,7 +144,7 @@ for (let i = 3; i < 19; i++) {
             vendrediAMrtrre.push(["TD Maths", "20", 8, 10])
             vendrediAMrtrre.push(["TP Physique", "B214", 10, 12])
 
-            lundiAMettre.push(["Anglais", "jsp", 13, 14])
+            lundiAMettre.push(["Anglais", "33", 13, 14])
             lundiAMettre.push(["TD Physique", "20", 14, 16])
         }
 
@@ -152,7 +152,7 @@ for (let i = 3; i < 19; i++) {
             vendrediAMrtrre.push(["TD Maths", "20", 10, 12])
             vendrediAMrtrre.push(["TP Physique", "B214", 8, 10])
 
-            lundiAMettre.push(["Anglais", "jsp", 14, 15])
+            lundiAMettre.push(["Anglais", "33", 14, 15])
             lundiAMettre.push(["TD Physique", "20", 12, 14])
         }
         console.log("khlh",kholes[semaine])
