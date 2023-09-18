@@ -2,5 +2,8 @@ Lundi 18/09 :
 - Physique TD N°2: 14, 15
 Mardi 19/09 :
 - Maths DM N°2
+- Info QCM: Commandes Unix de Base, Language C : les débuts , variables,types: int8, int 16, int32, int64, char et char*, tableaux: debuts pointeurs, Algos simples
+Mercrdi 20/09:
+- Physique TD 01 N*03 Faire exo 4. Terminer calculs chapitre 4 document 1 (soleil en minute d'arc, proxima centauri en seconde d'arc). Tout mettre dans des pochettes
 Lundi 25/09 :
 - SI terminer le calcul sur le TD
