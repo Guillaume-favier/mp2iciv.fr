@@ -36,7 +36,7 @@ async function getText(url) {
             big.appendChild(li)
             cur = ul
         }
-        document.getElementsByClassName("content")[0].appendChild(big)
+        document.getElementsByClassName("content")[1].appendChild(big)
     })
 
     
