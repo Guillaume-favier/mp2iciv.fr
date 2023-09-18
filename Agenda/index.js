@@ -9,13 +9,23 @@ async function getText(url) {
     let generalText = getText("/Agenda/agenda.txt");
     let big = document.createElement("ul")
     let cur;
+    let sous;
     (await generalText).split("\n").forEach(e => {
         if (e == "") {
             return
+        } if (e.startsWith("  - ")){
+            let li = document.createElement("li")
+            li.innerText = e.substring(4)
+            sous.appendChild(li)
         }
-        if (e.startsWith("- ")) {
+        else if (e.startsWith("- ")) {
             let li = document.createElement("li")
             li.innerText = e.substring(2)
+            if (e.endsWith(":") || e.endsWith(": ")){
+                let ul = document.createElement("ul")
+                li.appendChild(ul)
+                sous = ul
+            }
             cur.appendChild(li)
         }else {
             let li = document.createElement("li")
