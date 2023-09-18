@@ -5,6 +5,11 @@
     src: url('/font/migra extraBold.ttf');
     /* IE9 */
 }
+@font-face {
+    font-family: "KungFuMaster";
+    src: url('/font/KungFuMaster-K7vrX.otf');
+    /* IE9 */
+}
 
 
 body {
@@ -22,5 +27,6 @@ h1,h2,h3{
     font-weight: 400;
 }
 .beau {
-    font-family: 'Migra extraBold', 'Times New Roman', Times, serif;
+    font-family: 'KungFuMaster', 'Times New Roman', Times, serif;
+    
 }
