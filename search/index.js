@@ -29,6 +29,18 @@ const resetTable = () => {
     const getFromName = (s) => {
         let res = []
         s = clear(s)
+        let apres = false
+        console.log(Object.keys(db["classes"]))
+        Object.keys(db["classes"]).forEach(clsName => {
+            if (apres == false && s == clear(clsName)) {
+                apres = true
+                db["classes"][clsName].forEach(id => {
+                    res.push(db["per"][id])
+                });
+            }
+        })
+        if(apres) return res
+        if(s.length < 3) return false
         Object.keys(db["per"]).forEach(id => {
             const element = db["per"][id]
             const pre = clear(element["prenom"])
@@ -37,7 +49,7 @@ const resetTable = () => {
                 res.push(element)
             }
         });
-        return res
+        return res.length == 0 ? "nope" : res;
     }
     const putElems = (l) => {
         const statusConv = ["","Élève","Parent d'élève","Enseignant","Personnel non enseignant"]
@@ -56,11 +68,19 @@ const resetTable = () => {
     document.getElementById("inp").oninput = (e) => {
         const txt = e.target.value;
         resetTable()
-        if (txt.length > 2){
+        const test = getFromName(txt)
+        
+        if (test == "nope") {
+            errr.style.display = "block";
+            errr.innerHTML = "0 personnes trouvés"
+            table.style.display = "none";
+        }else if (test !== false) {
             errr.style.display = "none";
             table.style.display = "block";
-            putElems(getFromName(txt))
-        }else{
+            putElems(test)
+        }
+        else{
+            errr.innerHTML = "Pas assès de caractères"
             errr.style.display = "block";
             table.style.display = "none";
         }
