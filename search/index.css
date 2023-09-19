@@ -4,6 +4,8 @@
 }
 td{
     border: 1px solid black;
+    text-align: center;
+    vertical-align: center;
 }th{
     border: 2px solid black;
 }
