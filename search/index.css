@@ -1,0 +1,9 @@
+#toPutTo {
+    /* border :2px solid black; */
+    border-collapse: collapse;
+}
+td{
+    border: 1px solid black;
+}th{
+    border: 2px solid black;
+}

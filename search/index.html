@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/general.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="/logo.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="/nav/nav.css" rel="stylesheet" />
+    <link href="/search/index.css" rel="stylesheet" />
+    <title>Recherche - MP2I CIV</title>
+</head>
+
+<body>
+    <div class="topnav" id="myTopnav">
+        <a href="/">Accueil</a>
+        <a href="/EDT/">EDT</a>
+        <a href="/Agenda/">Agenda</a>
+        <a href="/ressources/">Ressources</a>
+        <a href="/HOF/">Hall of fame</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <center>
+        <h1 class="beau">Recherche</h1>
+        <form>
+            <input type="text" placeholder="nom ou prenom" id="inp">
+        </form>
+    </center>
+    <div class="content">
+        <table id="toPutTo" style="display:none;">
+        </table>
+        <div id="errr">
+            Pas assès de caractères
+        </div>
+    </div>
+
+</body>
+<script src="/nav/nav.js"></script>
+<script src="/search/index.js"></script>
+
+
+</html>
