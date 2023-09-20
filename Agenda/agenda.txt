@@ -1,17 +1,14 @@
-Mardi 19/09 :
-- Maths DM N°2
-- Info QCM:
-  - Commandes Unix de Base,
-  - Language C : les débuts
-  - variables
-  - types: int8, int 16, int32, int64, char et char*
-  - tableaux: debuts pointeurs
-  - Algos simples
 Mercrdi 20/09:
 - Physique:
   - TD 01 N°03 Faire exo 4.
   - Terminer calculs chapitre 4 document 1 (soleil en minute d'arc, proxima centauri en seconde d'arc).
   - Tout mettre dans des pochettes
+  - Faire le Qmax ce soir avec une feuille et un peu de temps
+Vendredi 22/09:
+- Physique:
+  - faire Qmax mercredi soir avec une feuille et un peu de temps
+  - Arriver a 7h50 en cours 
+  - s'avancer au max sur les TD en prevision des devoris pour ce weekend
 Lundi 25/09 :
 - SI terminer le calcul sur le TD
 Mardi 26/09 :
