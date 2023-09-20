@@ -230,11 +230,11 @@ for (let i = 3; i < 19; i++) {
         })
         let mardi = []
         if (groupeI == "1" || groupeI == "S") {
-            mardi.push(["Info", "37", 15, 17])
+            mardi.push([" TP Info", "37", 15, 17])
         } if (groupeI == 2 || groupeI == "S") {
-            mardi.push(["Info", "37", 17, 19])
+            mardi.push(["TP Info", "37", 17, 19])
         } if (groupeI == 3 || groupeI == "S") {
-            cou = ["Info", "37", 16, 18]
+            cou = ["TP Info", "37", 16, 18]
             let bon = false;
             EDT[2].forEach((e, i) => {
                 if (bon) return
