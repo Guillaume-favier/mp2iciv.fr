@@ -1,7 +1,6 @@
 table,
 tbody {
     min-width: 50%;
-    font-size: 1.5vw;
 }
 
 tr {
@@ -27,4 +26,9 @@ td {
 
 .hid {
     display: none;
+}
+@media screen and (max-width: 600px) {
+    tbody{
+        font-size: 3vw;
+    }
 }

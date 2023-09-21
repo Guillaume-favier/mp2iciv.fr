@@ -323,7 +323,7 @@ for (let i = 3; i < 19; i++) {
                         // console.log(element, i, joursN[jour], last[jour])
                         const td = document.createElement("td")
                         td.className = "cours"
-                        td.innerText = element[0] + " (" + element[1] + ")\n" + backHour(element[2]) + " - " + backHour(element[3])
+                        td.innerText = element[0] + "\n (" + element[1] + ")\n" + backHour(element[2]) + " - " + backHour(element[3])
                         const n = (element[3] - element[2])
                         if (n != 1) td.rowSpan = n
                         tr.appendChild(td)
