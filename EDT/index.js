@@ -141,16 +141,16 @@ for (let i = 3; i < 19; i++) {
         const lundiAMettre = []
 
         const n1 = () => {
-            vendrediAMrtrre.push(["TD Maths", "20", 8, 10])
-            vendrediAMrtrre.push(["TP Physique", "B214", 10, 12])
+            vendrediAMrtrre.push(["TD Maths", "20", conHeure("7h50"), conHeure("9h50")])
+            vendrediAMrtrre.push(["TP Physique", "B214", conHeure("9h50"), conHeure("11h50")])
 
             lundiAMettre.push(["Anglais", "33", 13, 14])
             lundiAMettre.push(["TD Physique", "20", 14, 16])
         }
 
         const n2 = () => {
-            vendrediAMrtrre.push(["TD Maths", "20", 10, 12])
-            vendrediAMrtrre.push(["TP Physique", "B214", 8, 10])
+            vendrediAMrtrre.push(["TD Maths", "20", conHeure("9h50"), conHeure("11h50")])
+            vendrediAMrtrre.push(["TP Physique", "B214", conHeure("7h50"), conHeure("9h50")])
 
             lundiAMettre.push(["Anglais", "33", 14, 15])
             lundiAMettre.push(["TD Physique", "20", 12, 14])
