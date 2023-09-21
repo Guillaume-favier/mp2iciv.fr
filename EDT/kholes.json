@@ -73,18 +73,18 @@
   ],
   "francais": [
     [],
-    ["Capitani", 4, "16h30", "K25"],
+    ["Capitani", 4, "16h30", "Labo de langue"],
     [],
     [],
-    ["Capitani", 4, 15, "K25"],
-    [],
-    [],
-    [],
-    ["Capitani", 5, "17h30", 23],
+    ["Capitani", 4, 15, "Labo de langue"],
     [],
     [],
     [],
+    ["Capitani", 5, "17h30", "Labo de langue"],
     [],
-    ["Capitani", 5, 16, 23]
+    [],
+    [],
+    [],
+    ["Capitani", 5, 16, "Labo de langue"]
   ]
 }
