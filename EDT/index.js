@@ -75,7 +75,9 @@ for (let i = 3; i < 19; i++) {
 }
 var palletteElem = document.getElementById("pallette")
 
-
+const ajusteDate = (n) => {
+    return n < 10 ? "0"+ n : n
+}
 
 ; (async () => {
 
@@ -86,6 +88,7 @@ var palletteElem = document.getElementById("pallette")
     const info = await getText("/EDT/info.txt")
     const orgEDT = await getJson("/EDT/EDT.json")
     const pallette = await getJson("/EDT/palettes.json")
+    const semaineNom = await getJson("/EDT/semaine.json")
     let EDT = structuredClone(orgEDT)
     txt.innerHTML = "Traitement des données ..."
     let ninfo = []
@@ -99,10 +102,33 @@ var palletteElem = document.getElementById("pallette")
     let semaine = 4;
     semaines.value = semaine
     let CKh = 0;
-    let kholes = []
+    let kholes = [""]
     for (let i = 0; i < 17; i++) {
         kholes.push([]);
     }
+    const metNumJours = () => {
+        const base = semaineNom[semaine-2].split("/");
+        // const s = "20" + base[2] + "-" + (base[1]) + "-" + (ajusteDate(Number(base[0]))) + "T22:01:00.000z"
+        // console.log(s)
+
+        let n = (new Date(Number("20" + base[2]), Number(base[1])-1, Number(base[0]))).getTime()
+        // console.log(n, Number("20" + base[2]), Number(base[1]), Number(base[0]))
+        const j = [""];
+        for (let i = 0; i < 5; i++) {
+            const now = new Date(n)
+            j.push(jours[i + 1] + " " + ajusteDate(now.getDate()) + "/" + ajusteDate(now.getMonth()+1))
+            n+=24*3600*1000
+        }
+        const ElemEDT = document.getElementById("EDT").children[0].children
+        console.log(ElemEDT)
+        for (let i = 0; i < ElemEDT.length; i++) {
+            const element = ElemEDT[i];
+            element.innerText = j[i]
+            console.log(element)
+        }
+        console.log(j)
+    }
+    metNumJours()
 
     const afficheCours = (m, nom) => {
         const p = document.createElement("p")
@@ -384,11 +410,9 @@ var palletteElem = document.getElementById("pallette")
         } else {
             palletteElem.value = palcook
         }
-        console.log(palcook, palletteElem.value, pallette)
 
         const namePal = palletteElem.value
         const pal = pallette[namePal]
-        console.log(pal)
         if (typeof pal == "undefined" ||pal == null) {
             return
         }
@@ -418,6 +442,7 @@ var palletteElem = document.getElementById("pallette")
 
         if (testparams() == false) return
         afficheEDT()
+        metNumJours()
         setPallette()
     }
 
