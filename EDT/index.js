@@ -224,14 +224,11 @@ var palletteElem = document.getElementById("pallette")
                 n1()
             }
         }
-        console.log(lundiAMettre)
         lundiAMettre.forEach(cou => {
             let bon = false;
-            console.log(cou)
             EDT[0].forEach((e, i) => {
                 if (bon) return
                 if (e[2] > cou[2]) {
-                    // console.log("oui",cou)
                     EDT[0].splice(i, 0, cou);
                     bon = true
                 }
@@ -381,15 +378,20 @@ var palletteElem = document.getElementById("pallette")
 
     const setPallette = () => {
         const palcook = getCookie("pallette")
-        if (palcook == "") {
+        if (palcook == "" || Object.keys(pallette).indexOf(palcook) == -1) {
             palletteElem.value = "Guillaume"
-            setCookie("pallette", palletteElem.value, 100)
-        }else {
+            setCookie("pallette", "Guillaume", 100)
+        } else {
             palletteElem.value = palcook
         }
+        console.log(palcook, palletteElem.value, pallette)
 
         const namePal = palletteElem.value
         const pal = pallette[namePal]
+        console.log(pal)
+        if (typeof pal == "undefined" ||pal == null) {
+            return
+        }
         Object.keys(pal).forEach(matiere => {
             const mm = document.getElementsByClassName(matiere)
             for (let i = 0; i < mm.length; i++) {
