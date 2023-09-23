@@ -7,6 +7,11 @@ const conHeure = (n) => {
     } return Number(n)
 }
 
+const backHour = (n) => {
+    let reste = n - Math.floor(n)
+    if (reste > 0) return Math.floor(n).toString() + "h" + Math.round(reste * 60)
+    return Math.floor(n).toString() + "h"
+}
 jours = ["", "lundi", "mardi", "mercredi", "jeudi", "vendredi"]
 
 async function getJson(url) {
@@ -23,11 +28,28 @@ async function getText(url) {
 }
 
 
-const backHour = (n) => {
-    let reste = n - Math.floor(n)
-    if (reste > 0) return Math.floor(n).toString() + "h" + Math.round(reste * 60)
-    return Math.floor(n).toString() + "h"
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
 
 
 var selectGrp = document.getElementById("grpKhole")
@@ -39,6 +61,10 @@ for (let i = 1; i <= 16; i++) {
     selectGrp.appendChild(opt)
 }
 
+const cookiegrp = getCookie("GroupeKholle")
+selectGrp.value = cookiegrp
+
+
 var semaines = document.getElementById("semaine")
 for (let i = 3; i < 19; i++) {
 
@@ -47,6 +73,9 @@ for (let i = 3; i < 19; i++) {
     opt.innerText = i
     semaines.appendChild(opt)
 }
+var palletteElem = document.getElementById("pallette")
+
+
 
 ; (async () => {
 
@@ -56,6 +85,7 @@ for (let i = 3; i < 19; i++) {
     const ds = await getJson("/EDT/DS.json")
     const info = await getText("/EDT/info.txt")
     const orgEDT = await getJson("/EDT/EDT.json")
+    const pallette = await getJson("/EDT/palettes.json")
     let EDT = structuredClone(orgEDT)
     txt.innerHTML = "Traitement des données ..."
     let ninfo = []
@@ -64,9 +94,9 @@ for (let i = 3; i < 19; i++) {
     })
 
 
-    let groupeK = 0;
+    let groupeK = selectGrp.value == "" ? 0 : Number(selectGrp.value);
     let groupeI = 0;
-    let semaine = 3;
+    let semaine = 4;
     semaines.value = semaine
     let CKh = 0;
     let kholes = []
@@ -80,18 +110,18 @@ for (let i = 3; i < 19; i++) {
         txt.appendChild(p)
     }
     const getKholes = (c, s) => {
-        let all = [db["maths"][c - 1].concat(["maths"])]
+        let all = [db["maths"][c - 1].concat(["Maths"])]
 
         if (c % 2 == 1) {
-            all.push(db["physique"][c - 1].concat(["physique"]))
+            all.push(db["physique"][c - 1].concat(["Physique"]))
         } else {
-            all.push(db["anglais"][c - 1].concat(["anglais"]))
+            all.push(db["anglais"][c - 1].concat(["Anglais"]))
         }
         if (c == 1 || c == 10) {
-            all.push(db["info"][c - 1].concat(["info"]))
+            all.push(db["info"][c - 1].concat(["Info"]))
         }
         if ((s % 2 == 0 && (c == 2 || c == 5)) || (s % 2 == 1 && (c == 9 || c == 14))) {
-            all.push(db["francais"][c - 1].concat(["francais"]))
+            all.push(db["francais"][c - 1].concat(["Français"]))
         }
         return all
     }
@@ -141,57 +171,55 @@ for (let i = 3; i < 19; i++) {
         const lundiAMettre = []
 
         const n1 = () => {
-            vendrediAMrtrre.push(["TD Maths", "20", conHeure("7h50"), conHeure("9h50")])
-            vendrediAMrtrre.push(["TP Physique", "B214", conHeure("9h50"), conHeure("11h50")])
+            vendrediAMrtrre.push(["TD Maths", "20", conHeure("7h50"), conHeure("9h50"),"Maths"])
+            vendrediAMrtrre.push(["TP Physique", "B214", conHeure("9h50"), conHeure("11h50"),"Physique"])
 
             lundiAMettre.push(["Anglais", "33", 13, 14])
-            lundiAMettre.push(["TD Physique", "20", 14, 16])
+            lundiAMettre.push(["TD Physique", "20", 14, 16, "Physique"])
         }
 
         const n2 = () => {
-            vendrediAMrtrre.push(["TD Maths", "20", conHeure("9h50"), conHeure("11h50")])
-            vendrediAMrtrre.push(["TP Physique", "B214", conHeure("7h50"), conHeure("9h50")])
+            vendrediAMrtrre.push(["TD Maths", "20", conHeure("9h50"), conHeure("11h50"), "Maths"])
+            vendrediAMrtrre.push(["TP Physique", "B214", conHeure("7h50"), conHeure("9h50"), "Physique"])
 
             lundiAMettre.push(["Anglais", "33", 14, 15])
-            lundiAMettre.push(["TD Physique", "20", 12, 14])
+            lundiAMettre.push(["TD Physique", "20", 12, 14, "Physique"])
         }
-        console.log("khlh",kholes[semaine])
         const toCheck = kholes[semaine - 3]
         if (semaine % 2 == 1) {
 
             if (groupeK % 2 == 1) {
                 if (toCheck == 5) {
-                    lundiAMettre.push(["TD SI", "20", 10, 11])
+                    lundiAMettre.push(["TD SI", "20", 10, 11,"SI"])
                 }
-                else lundiAMettre.push(["TD SI", "20", 9, 10])
+                else lundiAMettre.push(["TD SI", "20", 9, 10,"SI"])
                 n1()
                 
 
                 
             } else {
                 if (toCheck == 6) {
-                    lundiAMettre.push(["TD SI", "20", 9, 10])
+                    lundiAMettre.push(["TD SI", "20", 9, 10,"SI"])
                 }
-                else lundiAMettre.push(["TD SI", "20", 10, 11])
+                else lundiAMettre.push(["TD SI", "20", 10, 11,"SI"])
                 n2()
                 
                 console.log(lundiAMettre)
             }
         } else {
-            console.log("test3")
             if (groupeK % 2 == 1) {
                 
                 if (toCheck == 6) {
-                    lundiAMettre.push(["TD SI", "20", 9, 10])
+                    lundiAMettre.push(["TD SI", "20", 9, 10, "SI"])
                 }
-                else lundiAMettre.push(["TD SI", "20", 10, 11])
+                else lundiAMettre.push(["TD SI", "20", 10, 11, "SI"])
 
                 n2()
             } else {
                 if (toCheck == 5) {
-                    lundiAMettre.push(["TD SI", "20", 10, 11])
+                    lundiAMettre.push(["TD SI", "20", 10, 11, "SI"])
                 }
-                else lundiAMettre.push(["TD SI", "20", 9, 10])
+                else lundiAMettre.push(["TD SI", "20", 9, 10, "SI"])
 
                 n1()
             }
@@ -229,12 +257,13 @@ for (let i = 3; i < 19; i++) {
 
         })
         let mardi = []
-        if (groupeI == "1" || groupeI == "S") {
-            mardi.push([" TP Info", "37", 15, 17])
+        if (groupeI == 1 || groupeI == "S") {
+            mardi.push([" TP Info", "37", 15, 17,"Info"])
         } if (groupeI == 2 || groupeI == "S") {
-            mardi.push(["TP Info", "37", 17, 19])
+            mardi.push(["TP Info", "37", 17, 19, "Info"])
         } if (groupeI == 3 || groupeI == "S") {
-            cou = ["TP Info", "37", 16, 18]
+            // cas particulier car seule occurence d'un changement d'emplois du temps le mercredi donc obligé d'inclure le passage suivant
+            cou = ["TP Info", "37", 16, 18, "Info"]
             let bon = false;
             EDT[2].forEach((e, i) => {
                 if (bon) return
@@ -270,7 +299,7 @@ for (let i = 3; i < 19; i++) {
         const matiere = getKholes((16 - (semaine - 3) + Number(groupeK) - 1) % 16 + 1, (semaine - 3));
         matiere.forEach(kh => {
             let bon = false;
-            const val = ["Khôlle " + kh[4], kh[3], conHeure(kh[2]), conHeure(kh[2]) + 1]
+            const val = ["Khôlle " + kh[4], kh[3], conHeure(kh[2]), conHeure(kh[2]) + 1, kh[4]]
             // console.log(EDT, kh)
             EDT[kh[1] - 1].forEach((e, i) => {
                 if (bon) return
@@ -306,23 +335,22 @@ for (let i = 3; i < 19; i++) {
 
         let eEDT = document.getElementById("EDT")
         let last = [8, 8, 8, 8, 8]
-        for (let i = 8; i < 20; i++) {
-            let tr = document.createElement("tr")
+        for (let i = 8; i < 20; i++) { // De 8h à 19h
+            let tr = document.createElement("tr") // ligne pour troute la semaine
 
             const heure = document.createElement("td")
             heure.className = "heure"
-            heure.innerText = i + "h"
+            heure.innerText = i + "h" // colonne de gauche des heures
             tr.appendChild(heure)
-            for (let jour = 0; jour < 5; jour++) {
+            for (let jour = 0; jour < 5; jour++) { 
                 let done = false
                 for (let numE = 0; numE < EDT[jour].length; numE++) {
                     const element = EDT[jour][numE];
                     if (i == Math.round(element[2])) {
-
                         last[jour] = element[3]
-                        // console.log(element, i, joursN[jour], last[jour])
+                        const coursMatiere = element.length == 4 ? element[0] : element[4]
                         const td = document.createElement("td")
-                        td.className = "cours"
+                        td.className = "cours " + coursMatiere
                         td.innerText = element[0] + "\n (" + element[1] + ")\n" + backHour(element[2]) + " - " + backHour(element[3])
                         const n = (element[3] - element[2])
                         if (n != 1) td.rowSpan = n
@@ -344,6 +372,32 @@ for (let i = 3; i < 19; i++) {
         }
 
     }
+    Object.keys(pallette).forEach(name => {
+        const option = document.createElement("option")
+        option.value = name
+        option.innerText = name
+        palletteElem.appendChild(option)
+    })
+
+    const setPallette = () => {
+        const palcook = getCookie("pallette")
+        if (palcook == "") {
+            palletteElem.value = "Guillaume"
+            setCookie("pallette", palletteElem.value, 100)
+        }else {
+            palletteElem.value = palcook
+        }
+
+        const namePal = palletteElem.value
+        const pal = pallette[namePal]
+        Object.keys(pal).forEach(matiere => {
+            const mm = document.getElementsByClassName(matiere)
+            for (let i = 0; i < mm.length; i++) {
+                const element = mm[i];
+                element.style.background = pal[matiere]
+            }
+        })
+    }
 
     const updateSemaines = () => {
         if (groupeK == "") {
@@ -362,6 +416,14 @@ for (let i = 3; i < 19; i++) {
 
         if (testparams() == false) return
         afficheEDT()
+        setPallette()
+    }
+
+    const changementPourEdt = () => {
+        resetEDT()
+        groupeK = Number(selectGrp.value)
+        updateSemaines()
+
     }
 
     semaines.onchange = e => {
@@ -385,15 +447,17 @@ for (let i = 3; i < 19; i++) {
     }
 
 
+    changementPourEdt()
 
     selectGrp.onchange = e => {
-        resetEDT()
-        groupeK = Number(e.target.value)
-        
-        
-
-        updateSemaines()
+        setCookie("GroupeKholle", e.target.value, 100)
+        changementPourEdt()
 
     }
+    palletteElem.onchange = e => {
+        setCookie("pallette", palletteElem.value, 100)
+        updateSemaines()
+    }
+    setPallette()
     // console.log(info)
 })()

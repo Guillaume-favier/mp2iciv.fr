@@ -1,0 +1,30 @@
+{
+    "Guillaume":{
+      "SI": "#fcba03",
+      "Maths": "#d95a41",
+      "Français": "#a3a3a3",
+      "Physique": "#616fd4",
+      "Anglais": "#b521ab",
+      "Info": "#21b52a",
+      "EPS": "#21a9b5"
+    },
+    "Pronote":{
+      "SI": "#dc79aa",
+      "Maths": "#8886ce",
+      "Français": "#ddf6f6",
+      "Physique": "#cc9188",
+      "Anglais": "#94bfa0",
+      "Info": "#a394bf",
+      "EPS": "#b4b4b4"
+    },
+    "Tout blanc":{
+      "SI": "#ffffff",
+      "Maths": "#ffffff",
+      "Français": "#ffffff",
+      "Physique": "#ffffff",
+      "Anglais": "#ffffff",
+      "Info": "#ffffff",
+      "EPS": "#ffffff"
+    }
+    
+}
