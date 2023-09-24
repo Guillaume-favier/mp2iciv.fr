@@ -6,7 +6,7 @@ tbody {
 tr {
     width: 100%;
     border: 1px solid black;
-
+    height: 50px;
 }
 
 td {
