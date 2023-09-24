@@ -166,7 +166,7 @@ const ajusteDate = (n) => {
         const inputDs = ds[semaine - 2]
         dsP.innerText = "DS : " + (typeof (inputDs) != "undefined" ? inputDs : "Non défini")
         txt.appendChild(dsP)
-        txt.appendChild(document.createElement("br"))
+        // txt.appendChild(document.createElement("br"))
 
         const kholesTexte = document.createElement("p")
         kholesTexte.innerText = "Kôlles :"
