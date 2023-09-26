@@ -1,5 +1,5 @@
 
-const conHeure = (n) => {
+const heureToNombre = (n) => {
     if (typeof n == typeof 2) return n
     if (n.indexOf("h") > -1) {
         let nn = n.split("h")
@@ -7,7 +7,7 @@ const conHeure = (n) => {
     } return Number(n)
 }
 
-const backHour = (n) => {
+const nombreToHeure = (n) => {
     let reste = n - Math.floor(n)
     if (reste > 0) return Math.floor(n).toString() + "h" + Math.round(reste * 60)
     return Math.floor(n).toString() + "h"
@@ -91,9 +91,9 @@ const ajusteDate = (n) => {
     const semaineNom = await getJson("/EDT/semaine.json")
     let EDT = structuredClone(orgEDT)
     txt.innerHTML = "Traitement des données ..."
-    let ninfo = []
+    let tableauInfo = []
     info.split("\n").forEach(lign => {
-        ninfo.push(lign.split(" "))
+        tableauInfo.push(lign.split(" "))
     })
 
 
@@ -106,13 +106,11 @@ const ajusteDate = (n) => {
     for (let i = 0; i < 17; i++) {
         kholes.push([]);
     }
+
     const metNumJours = () => {
         const base = semaineNom[semaine-2].split("/");
-        // const s = "20" + base[2] + "-" + (base[1]) + "-" + (ajusteDate(Number(base[0]))) + "T22:01:00.000z"
-        // console.log(s)
 
         let n = (new Date(Number("20" + base[2]), Number(base[1])-1, Number(base[0]))).getTime()
-        // console.log(n, Number("20" + base[2]), Number(base[1]), Number(base[0]))
         const j = [""];
         for (let i = 0; i < 5; i++) {
             const now = new Date(n)
@@ -131,9 +129,10 @@ const ajusteDate = (n) => {
     metNumJours()
 
     const afficheCours = (m, nom) => {
-        const p = document.createElement("p")
-        p.innerText = nom + ", " + m[0] + " le " + jours[m[1]] + " à  " + (typeof m[2] == typeof 2 ? (m[2] + "h") : m[2]) + " en " + m[3]
-        txt.appendChild(p)
+        const li = document.createElement("li")
+        li.innerText = nom + ", " + m[0] + " le " + jours[m[1]] + " à  " + (typeof m[2] == typeof 2 ? (m[2] + "h") : m[2]) + " en " + m[3]
+        // txt.appendChild(p)
+        return li
     }
     const getKholes = (c, s) => {
         let all = [db["maths"][c - 1].concat(["Maths"])]
@@ -171,19 +170,21 @@ const ajusteDate = (n) => {
         const kholesTexte = document.createElement("p")
         kholesTexte.innerText = "Kôlles :"
         txt.appendChild(kholesTexte)
-        afficheCours(db["maths"][c - 1], "Maths")
+        const ul = document.createElement("ul")
+        ul.appendChild(afficheCours(db["maths"][c - 1], "Maths"))
         if (c % 2 == 1) {
-            afficheCours(db["physique"][c - 1], "Physique")
+            ul.appendChild(afficheCours(db["physique"][c - 1], "Physique"))
         } else {
-            afficheCours(db["anglais"][c - 1], "Anglais")
+            ul.appendChild(afficheCours(db["anglais"][c - 1], "Anglais"))
         }
         if (c == 1 || c == 10) {
-            afficheCours(db["info"][c - 1], "Informatique")
+            ul.appendChild(afficheCours(db["info"][c - 1], "Informatique"))
         }
         if ((s % 2 == 0 && (c == 2 || c == 5)) || (s % 2 == 1 && (c == 9 || c == 14))) {
             // console.log("test")
-            afficheCours(db["francais"][c - 1], "Français")
+            ul.appendChild(afficheCours(db["francais"][c - 1], "Français"))
         }
+        txt.appendChild(ul)
     }
     txt.innerHTML = "Choisir un groupe"
     const testparams = () => {
@@ -197,16 +198,16 @@ const ajusteDate = (n) => {
         const lundiAMettre = []
 
         const n1 = () => {
-            vendrediAMrtrre.push(["TD Maths", "20", conHeure("7h50"), conHeure("9h50"),"Maths"])
-            vendrediAMrtrre.push(["TP Physique", "B214", conHeure("9h50"), conHeure("11h50"),"Physique"])
+            vendrediAMrtrre.push(["TD Maths", "20", heureToNombre("7h50"), heureToNombre("9h50"),"Maths"])
+            vendrediAMrtrre.push(["TP Physique", "B214", heureToNombre("9h50"), heureToNombre("11h50"),"Physique"])
 
             lundiAMettre.push(["Anglais", "33", 13, 14])
             lundiAMettre.push(["TD Physique", "20", 14, 16, "Physique"])
         }
 
         const n2 = () => {
-            vendrediAMrtrre.push(["TD Maths", "20", conHeure("9h50"), conHeure("11h50"), "Maths"])
-            vendrediAMrtrre.push(["TP Physique", "B214", conHeure("7h50"), conHeure("9h50"), "Physique"])
+            vendrediAMrtrre.push(["TD Maths", "20", heureToNombre("9h50"), heureToNombre("11h50"), "Maths"])
+            vendrediAMrtrre.push(["TP Physique", "B214", heureToNombre("7h50"), heureToNombre("9h50"), "Physique"])
 
             lundiAMettre.push(["Anglais", "33", 14, 15])
             lundiAMettre.push(["TD Physique", "20", 12, 14, "Physique"])
@@ -322,11 +323,11 @@ const ajusteDate = (n) => {
         const matiere = getKholes((16 - (semaine - 3) + Number(groupeK) - 1) % 16 + 1, (semaine - 3));
         matiere.forEach(kh => {
             let bon = false;
-            const val = ["Khôlle " + kh[4], kh[3], conHeure(kh[2]), conHeure(kh[2]) + 1, kh[4]]
+            const val = ["Khôlle " + kh[4], kh[3], heureToNombre(kh[2]), heureToNombre(kh[2]) + 1, kh[4]]
             // console.log(EDT, kh)
             EDT[kh[1] - 1].forEach((e, i) => {
                 if (bon) return
-                if (e[2] > Math.round(conHeure(kh[2]))) {
+                if (e[2] > Math.round(heureToNombre(kh[2]))) {
                     EDT[kh[1] - 1].splice(i, 0, val);
                     bon = true
                 }
@@ -374,7 +375,7 @@ const ajusteDate = (n) => {
                         const coursMatiere = element.length == 4 ? element[0] : element[4]
                         const td = document.createElement("td")
                         td.className = "cours " + coursMatiere
-                        td.innerText = element[0] + "\n (" + element[1] + ")\n" + backHour(element[2]) + " - " + backHour(element[3])
+                        td.innerText = element[0] + "\n (" + element[1] + ")\n" + nombreToHeure(element[2]) + " - " + nombreToHeure(element[3])
                         const n = (element[3] - element[2])
                         if (n != 1) td.rowSpan = n
                         tr.appendChild(td)
@@ -430,7 +431,7 @@ const ajusteDate = (n) => {
             txt.innerText = "Paramètres invalides"
             return
         }
-        groupeI = ninfo[groupeK - 1][semaine - 3]
+        groupeI = tableauInfo[groupeK - 1][semaine - 3]
         if (semaine > 18) semaine = 3
         if (semaine < 3) semaine = 18
         semaines.value = semaine
@@ -485,6 +486,13 @@ const ajusteDate = (n) => {
         setCookie("pallette", palletteElem.value, 100)
         updateSemaines()
     }
-    setPallette()
-    // console.log(info)
+    semaines.childNodes.forEach(elem => {
+        const base = semaineNom[elem.value - 2].split("/");
+
+        let init = (new Date(Number("20" + base[2]), Number(base[1]) - 1, Number(base[0]))).getTime()
+        let start = new Date(init)
+        let end = new Date(init + 4 * 24 * 3600 * 1000)
+        elem.innerText = "n°"+elem.value + " : " +ajusteDate(start.getDate()) + "/" + ajusteDate(start.getMonth() + 1) + " - " + ajusteDate(end.getDate()) + "/" + ajusteDate(end.getMonth() + 1)
+    })
+    // setPallette()
 })()
