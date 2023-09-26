@@ -17,6 +17,15 @@
       "Info": "#a394bf",
       "EPS": "#b4b4b4"
     },
+    "Pastel":{
+      "SI": "#fdffb6",
+      "Maths": "#ffadad",
+      "Français": "#9bf6ff",
+      "Physique": "#a0c4ff",
+      "Anglais": "#ffc6ff",
+      "Info": "#caffbf",
+      "EPS": "#ffd6a5"
+    },
     "Tout blanc":{
       "SI": "#ffffff",
       "Maths": "#ffffff",
