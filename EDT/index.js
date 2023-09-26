@@ -39,8 +39,10 @@ for (let i = 1; i <= 16; i++) {
 }
 
 const cookiegrp = getCookie("GroupeKholle")
-selectGrp.value = cookiegrp
-
+if (cookiegrp == "" || (Number(cookiegrp) < 17 && Number(cookiegrp) > 0)) {
+    // console.log("ah ? " + cookiegrp)
+    selectGrp.value = cookiegrp
+} else selectGrp.value = ""
 
 var semaines = document.getElementById("semaine")
 for (let i = 3; i < 19; i++) {
@@ -95,13 +97,13 @@ const ajusteDate = (n) => {
             n+=24*3600*1000
         }
         const ElemEDT = document.getElementById("EDT").children[0].children
-        console.log(ElemEDT)
+        // console.log(ElemEDT)
         for (let i = 0; i < ElemEDT.length; i++) {
             const element = ElemEDT[i];
             element.innerText = j[i]
-            console.log(element)
+            // console.log(element)
         }
-        console.log(j)
+        // console.log(j)
     }
     metNumJours()
 
