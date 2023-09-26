@@ -5,6 +5,7 @@
     src: url('/font/migra extraBold.ttf');
     /* IE9 */
 }
+
 @font-face {
     font-family: "KungFuMaster";
     src: url('/font/KungFuMaster-K7vrX.otf');
@@ -15,22 +16,30 @@
 body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
-}
-a {
-    color: #196f4f;
+    background-color: #131413;
+    color: #eae7e7;
 }
 
-.content{
+a {
+    color: #21d08f;
+}
+
+.content {
     margin: 3%;
 }
-h1,h2,h3{
+
+h1,
+h2,
+h3 {
     font-weight: 400;
 }
+
 .beau {
     font-family: 'KungFuMaster', 'Times New Roman', Times, serif;
-    
+
 }
-.lune{
+
+.lune {
     position: fixed;
     bottom: 15px;
     right: 15px;
