@@ -34,4 +34,11 @@ h1,h2,h3{
     position: fixed;
     bottom: 15px;
     right: 15px;
+    background-color: black;
+    border-radius: 50%;
+}
+.lune > input {
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: black;
 }

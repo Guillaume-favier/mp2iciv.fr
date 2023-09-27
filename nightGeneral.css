@@ -41,10 +41,20 @@ h3 {
 
 .lune {
     position: fixed;
+
+    border-radius: 50%;
+    background-color: #fff;
     bottom: 15px;
     right: 15px;
 }
 
 .cours {
     color: #000;
+}
+
+.lune>input {
+
+    border-radius: 50%;
+    border: 1px solid #fff;
+    background-color: #fff;
 }
