@@ -9,7 +9,6 @@ th{
 }
 
 table {
-    width: 0vh;
     border: 1px solid black;
     border-collapse: collapse;
 }
