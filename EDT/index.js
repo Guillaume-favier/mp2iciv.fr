@@ -1,3 +1,68 @@
+/*
+                                                                                                                              
+            ░░                                                                ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░                    
+           ░▒▒░░░░░▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒░░░░░░░▒▒▒        
+            ▒              ░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░                                                  ░░ ░░    ░░  ░▒         
+            ▒                                                                                                ░░░ ░░      ░   ▒         
+            ▒                                                   ░                                           ░░░░░░      ░░   ▒         
+            ▒                                              ░░░ ░░░   ░░░░  ░░░░   ░                          ░░  ░    ░░░   ░▒         
+            ▒                                              ░░░░░ ░   ░  ░  ░ ░░   ░                        ░░░ ░░░░░░░░░   ░░▒         
+           ░▒                 ░░░░░░░░░                    ░░ ░░ ░   ░░░░   ░░    ░                        ░ ░░░  ░░      ░░░▒         
+           ░▒       ░░░░░░░░░░░      ░░░░░░                ░░    ░   ░     ░░  ░  ░                         ░░  ░░ ░░░░░░░░ ░▒         
+           ░▒      ░░                     ░░░               ░    ░   ░     ░░░░░                               ░░  ░░   ░   ░░         
+           ░▒     ░░                        ░░                                                                    ░░  ░░    ▒░         
+           ░▒    ░░                          ░░░░                                                                ░░  ░░     ▒          
+           ░░    ░                              ░░░                                                                         ▒          
+           ▒░   ░░                                ░                                                                         ▒          
+           ▒░   ░░             ░░░░░░░░░        ░░░                                                                        ░▒          
+           ▒░    ░░░░       ░░░░       ░░░░░░░░░                                                                           ░▒          
+           ▒        ░░░░░░░░░                                                                  ░░                          ▒░          
+           ▒                              ░░░░░░░░░░░░░░░░░░░░                                ░░░░░░░░░░░░░░░░             ▒░          
+           ▒              ░░░░░░▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒░░░░░░░░░░░░ ░░░░░░░     ░░     ░░░       ░░░          ▒           
+           ▒           ░▒░░░░░                                        ░░░░░░░░░░░░░    ░░   ░░                  ░░         ▒           
+           ▒        ░░░░░                                 ░                    ░░       ░░▒░ ░░                  ░░░       ▒           
+          ░▒    ░░░░░                                   ░░░                    ░░░░ ░░░░░░░░░░░░░░                 ░░░░   ░▒           
+          ░▒ ░░░░░        ░                                                   ░░░▓▒░░▓▒░ ░      ░░░░░░░               ░░░░░▒           
+          ▒░ ░            ░░                                                  ░░░░░░░░░░ ░           ░░░░░░               ▒░           
+          ▒░             ░░░░                    ░░░░░░░░░░░░░░░░░░░         ░░ ░░░░░░░░░░░░░            ░░▒░░░           ▒░           
+          ▒░                                  ░▒░░░░░░░░░░░░░░     ░░░░      ░ ░░ ░░░   ░ ░░░░░▒▒░           ░░▒░         ▒░           
+          ▒                             ░░▒░░░░              ░░░░    ░░░░░░░░░░░        ░░ ░░   ░░░▒░           ░░░░      ▒            
+          ▒                        ░░░░░░░                  ░░░░░░         ░░░░          ░░ ░      ░░░░            ░░░░░  ▒            
+          ▒                      ░░░░                      ░░ ░░░░         ░ ░            ░░░░        ░░░             ░░░ ▒            
+          ▒                    ░░░          ░░░░  ░░░░    ░░  ░           ░░ ░             ░░░          ░                 ▒            
+          ▒                   ░░          ░░░  ░░░░░░░░░░░░  ░░           ░░ ░░            ░ ░          ░                 ▒            
+         ░▒                   ▒          ░░      ░░░░░░     ░░           ░░░░░░░          ░░░░          ░                ░▒            
+         ░▒                  ░░          ░░      ░░░░░░     ░           ░░   ░░░░        ░░ ▒░          ░         ░      ░▒            
+         ▒░              ░░ ░░            ░░   ░ ░░░░░░     ░           ░░░   ░░░░░░░░░░░░░░░░         ░░     ░░░░░      ▒░            
+         ▒░             ░░░░░              ░  ░░ ░░░░░░░░░░ ░░            ░░░░░░░░░░░░░░░░  ░░         ▒       ░░░░░░    ▒░            
+         ▒   ░░░       ░░ ░░               ░  ░░ ░      ░░░ ░                 ░░░░░      ░░░░          ░                 ▒             
+         ▒   ░░░░░░    ░░░░                ░░ ░░ ░      ░ ░░░                                          ░                 ▒             
+         ▒   ░░░░░      ░▒                  ░ ░░░░      ░ ░░░                                          ░                 ▒             
+         ▒              ░▒                  ░░░         ░░░                                            ░                 ▒             
+        ░▒             ░░▒▒                  ░░          ░░                                            ▒                ░▒             
+        ░▒             ░ ░░░                                                                           ░░ ░             ░▒             
+        ▒░             ░  ░░░░                                                                          ░░░░░   ░ ░░    ▒░             
+        ▒░             ░  ░▒░░░░                                                                         ░░ ░░  ░░░░░   ▒░             
+        ▒              ░   ░░░ ░░░                                                                        ░  ░   ░░░░   ▒              
+        ▒              ░   ░░░░░░░░░░                                                                    ░░  ░          ▒              
+        ▒                   ░░  ▒░  ░░░                                                                  ░░  ░          ▒░             
+        ▒                     ░░ ░░▒░ ░░░░                                                               ░   ░          ▒░             
+        ▒                      ░░░░ ░░░░ ░░░░░░                                                         ░░  ░░░         ░▒             
+        ▒      ░░ ░░░             ░░░░░░░░░░ ░░░░░░░░░                                                ░░▒  ░░            ▒             
+        ▒     ░░░░░░                  ░░░░ ░░░░░░   ░░░░░░░░░       ░░░░░░░                        ░░░░▒░ ░░             ▒             
+        ▒       ░ ░                             ░░▒░░░░     ░░▒▒▒▒▒░░░    ░░▒░░░░░              ░░░░░░░░  ░              ▒░            
+        ▒         ░░                                  ░░▒▒░░░░░░░     ░░░░░░░░  ░░░▒░░░░░░░░░▒▒░   ░░▒    ░              ░▒            
+        ▒░                                                  ░░░░░░▒▒░░░░░░░░░░▒░░     ░░░░░░░▒▒▒▒▓▒░░     ░     ░░░ ░ ░   ▒            
+        ▒░                                                      ░░░░░░░░░░░░░░░░░░░░░░░░░░░░           ░░░░    ░    ░  ░░ ▒            
+        ░▒                                                                     ░░░░                            ░░░  ░  ░░ ▒░░          
+        ░▒                            ░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░▓▒▒░         
+        ░▒ ░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░                                                           ▒░           
+         ▓▒▒░░░░                
+           2023 - 2024
+
+*/
+
+
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -54,7 +119,7 @@ for (let i = 1; i <= 16; i++) {
 
     const opt = document.createElement("option")
     opt.value = i.toString()
-    opt.innerText = "G" + i
+    opt.innerText = "G" + i 
     selectGrp.appendChild(opt)
 }
 
@@ -88,6 +153,7 @@ const ajusteDate = (n) => {
     const orgEDT = await getJson("/EDT/EDT.json")
     const pallette = await getJson("/EDT/palettes.json")
     const semaineNom = await getJson("/EDT/semaine.json")
+    const groupesPers = await getJson("/EDT/groupes.json")
     let EDT = structuredClone(orgEDT)
     txt.innerHTML = "Traitement des données ..."
     let tableauInfo = []
@@ -426,6 +492,8 @@ const ajusteDate = (n) => {
     }
 
     const updateSemaines = () => {
+        let ele = document.getElementById("persGrp");
+        ele.innerHTML = ""
         if (groupeK == "") {
             txt.innerText = "Paramètres invalides"
             return
@@ -440,10 +508,19 @@ const ajusteDate = (n) => {
         txt.innerHTML = ""
         afficheSemaine(kholes[semaine - 3], semaine - 3)
 
+        
         if (testparams() == false) return
         afficheEDT()
         metNumJours()
         setPallette()
+
+        let p = document.createElement("p")
+        p.innerText = "Personnes du groupe :"
+        groupesPers[groupeK - 1].forEach(pers => {
+            p.innerText += "\t " + pers[0] + " " + pers[1] + ", "
+        })
+        p.innerText = p.innerText.substring(0, p.innerText.length - 2)
+        ele.appendChild(p)
     }
 
     const changementPourEdt = () => {
@@ -475,11 +552,20 @@ const ajusteDate = (n) => {
 
 
     changementPourEdt()
+    for (let i = 1; i < selectGrp.children.length; i++) {
 
+        const el = selectGrp.children[i];
+        el.innerText += " :  "
+        console.log(el)
+        groupesPers[el.value - 1].forEach(pers => {
+            el.innerText += pers[1] + " " + pers[0][0]+". - "
+        })
+        el.innerText = el.innerText.substring(0, el.innerText.length - 2)
+        
+    }
     selectGrp.onchange = e => {
         setCookie("GroupeKholle", e.target.value, 100)
         changementPourEdt()
-
     }
     palletteElem.onchange = e => {
         setCookie("pallette", palletteElem.value, 100)
