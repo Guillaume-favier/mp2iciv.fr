@@ -1,4 +1,4 @@
-document.getElementById("url").innerText = window.location.hostname
+document.body.appendChild(document.createElement("br"))
 
 
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
@@ -55,3 +55,17 @@ document.getElementById("dark").onclick = () => {
     }
 }
 applyTheme()
+
+;(async() => {
+    const response = await fetch("/loc");
+    const u = document.getElementById("url")
+    if (response.ok) {
+        u.innerHTML = '<i class="fa-solid fa-server"></i> '
+    }else {
+        u.innerHTML = '<i class="fa-solid fa-file"></i> '
+    }
+    const a = document.createElement('a')
+    a.href = "/"
+    a.innerText = window.location.hostname 
+    u.appendChild(a)
+})()
