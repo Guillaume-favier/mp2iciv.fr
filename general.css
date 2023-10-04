@@ -30,15 +30,24 @@ h1,h2,h3{
     font-family: 'KungFuMaster', 'Times New Roman', Times, serif;
     
 }
-.lune{
+
+.footer{
+    text-align: center;
     position: fixed;
-    bottom: 15px;
-    right: 15px;
-    background-color: black;
-    border-radius: 50%;
+    bottom: 0px;
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    padding: 3px;
 }
-.lune > input {
-    border: 1px solid black;
-    border-radius: 50%;
-    background-color: black;
+.footer > a {
+    color: #fff;
+}
+#dark {
+    border: 1px solid #333;
+    background-color: #333;
+    position: absolute;
+    right: 16px;
+    bottom: 5px;
+
 }

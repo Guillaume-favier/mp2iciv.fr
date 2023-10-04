@@ -67,7 +67,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/general.css" rel="stylesheet" id="genestyle" />
     <link rel="icon" type="image/x-icon" href="/logo.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/5bd3a64755.js" crossorigin="anonymous"></script>
     <link href="/nav/nav.css" rel="stylesheet" />
     <title>Agenda - MP2I CIV</title>
 </head>
@@ -91,9 +91,11 @@
     </center>
     <div class="content">
     </div>
-    <div class="lune"><input value="🌙" type="submit" id="dark"></div>
-
+    <div class="footer"><span id="url"></span> est sous licence : <a href="https://www.gnu.org/licenses/quick-guide-gplv3.fr.html"><i class="fa-solid fa-scale-balanced"></i> GPL-3.0 </a><i class="fa-solid fa-moon" id="dark"></i></div>
 </body>
+<script>
+    document.getElementById("url").innerText = window.location.hostname
+    </script>
 <script src="/nav/nav.js"></script>
 <script src="/Agenda/index.js"></script>
 

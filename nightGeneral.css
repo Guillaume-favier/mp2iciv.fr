@@ -38,23 +38,30 @@ h3 {
     font-family: 'KungFuMaster', 'Times New Roman', Times, serif;
 
 }
-
-.lune {
-    position: fixed;
-
-    border-radius: 50%;
-    background-color: #fff;
-    bottom: 15px;
-    right: 15px;
-}
-
 .cours {
     color: #000;
 }
+.HOF td, .HOF th {
+    border: 1px solid white;
+}
 
-.lune>input {
-
-    border-radius: 50%;
-    border: 1px solid #fff;
+.footer {
+    text-align: center;
+    position: fixed;
     background-color: #fff;
+    color: #000;
+    bottom: 0px;
+    width:100%;
+    padding: 3px;
+}
+
+.footer>a {
+    color: #000;
+}
+
+
+#dark {
+    position: absolute;
+    bottom: 5px;
+    right: 16px;
 }
