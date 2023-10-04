@@ -517,7 +517,7 @@ const ajusteDate = (n) => {
         let p = document.createElement("p")
         p.innerText = "Personnes du groupe :"
         groupesPers[groupeK - 1].forEach(pers => {
-            p.innerText += "\t " + pers[0] + " " + pers[1] + ", "
+            p.innerText += "\t " + pers[1] + " " + pers[0] + ". ," 
         })
         p.innerText = p.innerText.substring(0, p.innerText.length - 2)
         ele.appendChild(p)
