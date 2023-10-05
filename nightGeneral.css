@@ -65,3 +65,7 @@ h3 {
     bottom: 5px;
     right: 16px;
 }
+
+.heure {
+    border-top: 1px solid white;
+}
