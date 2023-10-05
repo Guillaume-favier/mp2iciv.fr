@@ -6,7 +6,8 @@
       "Physique": "#616fd4",
       "Anglais": "#b521ab",
       "Info": "#21b52a",
-      "EPS": "#21a9b5"
+      "EPS": "#21a9b5",
+      "LV2": "#A8A196"
     },
     "Pronote":{
       "SI": "#dc79aa",
@@ -15,7 +16,8 @@
       "Physique": "#cc9188",
       "Anglais": "#94bfa0",
       "Info": "#a394bf",
-      "EPS": "#b4b4b4"
+      "EPS": "#b4b4b4",
+      "LV2": "#A8A196"
     },
     "Pastel":{
       "SI": "#fdffb6",
@@ -24,7 +26,8 @@
       "Physique": "#a0c4ff",
       "Anglais": "#ffc6ff",
       "Info": "#caffbf",
-      "EPS": "#ffd6a5"
+      "EPS": "#ffd6a5",
+      "LV2": "#FFF3DA"
     },
     "Tout blanc":{
       "SI": "#ffffff",
@@ -33,7 +36,8 @@
       "Physique": "#ffffff",
       "Anglais": "#ffffff",
       "Info": "#ffffff",
-      "EPS": "#ffffff"
+      "EPS": "#ffffff",
+      "LV2": "#ffffff"
     }
     
 }

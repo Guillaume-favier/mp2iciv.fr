@@ -97,7 +97,7 @@ const nombreToHeure = (n) => {
     if (reste > 0) return Math.floor(n).toString() + "h" + Math.round(reste * 60)
     return Math.floor(n).toString() + "h"
 }
-jours = ["", "lundi", "mardi", "mercredi", "jeudi", "vendredi"]
+jours = ["", "Lundi", " Mardi", "Mercredi", "Jeudi", "Vendredi"]
 
 async function getJson(url) {
     const response = await fetch(url);
@@ -258,133 +258,100 @@ const ajusteDate = (n) => {
 
     const makeEDT = () => {
         EDT = structuredClone(orgEDT)
-
-        const vendrediAMrtrre = []
-        const lundiAMettre = []
+        const mettreSemaine = [[],[],[],[],[]]
 
         const n1 = () => {
-            vendrediAMrtrre.push(["TD Maths", "20", heureToNombre("7h50"), heureToNombre("9h50"),"Maths"])
-            vendrediAMrtrre.push(["TP Physique", "B214", heureToNombre("9h50"), heureToNombre("11h50"),"Physique"])
+            mettreSemaine[4].push(["TD Maths", "20", heureToNombre("7h50"), heureToNombre("9h50"),"Maths"])
+            mettreSemaine[4].push(["TP Physique", "B214", heureToNombre("9h50"), heureToNombre("11h50"),"Physique"])
 
-            lundiAMettre.push(["Anglais", "33", 13, 14])
-            lundiAMettre.push(["TD Physique", "20", 14, 16, "Physique"])
+            mettreSemaine[0].push(["Anglais", "33", 13, 14])
+            mettreSemaine[0].push(["TD Physique", "20", 14, 16, "Physique"])
         }
 
         const n2 = () => {
-            vendrediAMrtrre.push(["TD Maths", "20", heureToNombre("9h50"), heureToNombre("11h50"), "Maths"])
-            vendrediAMrtrre.push(["TP Physique", "B214", heureToNombre("7h50"), heureToNombre("9h50"), "Physique"])
+            mettreSemaine[4].push(["TD Maths", "20", heureToNombre("9h50"), heureToNombre("11h50"), "Maths"])
+            mettreSemaine[4].push(["TP Physique", "B214", heureToNombre("7h50"), heureToNombre("9h50"), "Physique"])
 
-            lundiAMettre.push(["Anglais", "33", 14, 15])
-            lundiAMettre.push(["TD Physique", "20", 12, 14, "Physique"])
+            mettreSemaine[0].push(["Anglais", "33", 14, 15])
+            mettreSemaine[0].push(["TD Physique", "20", 12, 14, "Physique"])
         }
         const toCheck = kholes[semaine - 3]
         if (semaine % 2 == 1) {
 
             if (groupeK % 2 == 1) {
                 if (toCheck == 5) {
-                    lundiAMettre.push(["TD SI", "20", 10, 11,"SI"])
+                    mettreSemaine[0].push(["TD SI", "20", 10, 11,"SI"])
                 }
-                else lundiAMettre.push(["TD SI", "20", 9, 10,"SI"])
+                else mettreSemaine[0].push(["TD SI", "20", 9, 10,"SI"])
                 n1()
                 
 
                 
             } else {
                 if (toCheck == 6) {
-                    lundiAMettre.push(["TD SI", "20", 9, 10,"SI"])
+                    mettreSemaine[0].push(["TD SI", "20", 9, 10,"SI"])
                 }
-                else lundiAMettre.push(["TD SI", "20", 10, 11,"SI"])
+                else mettreSemaine[0].push(["TD SI", "20", 10, 11,"SI"])
                 n2()
                 
-                console.log(lundiAMettre)
+                console.log(mettreSemaine[0])
             }
         } else {
             if (groupeK % 2 == 1) {
                 
                 if (toCheck == 6) {
-                    lundiAMettre.push(["TD SI", "20", 9, 10, "SI"])
+                    mettreSemaine[0].push(["TD SI", "20", 9, 10, "SI"])
                 }
-                else lundiAMettre.push(["TD SI", "20", 10, 11, "SI"])
+                else mettreSemaine[0].push(["TD SI", "20", 10, 11, "SI"])
 
                 n2()
             } else {
                 if (toCheck == 5) {
-                    lundiAMettre.push(["TD SI", "20", 10, 11, "SI"])
+                    mettreSemaine[0].push(["TD SI", "20", 10, 11, "SI"])
                 }
-                else lundiAMettre.push(["TD SI", "20", 9, 10, "SI"])
+                else mettreSemaine[0].push(["TD SI", "20", 9, 10, "SI"])
 
                 n1()
             }
         }
-        lundiAMettre.forEach(cou => {
-            let bon = false;
-            EDT[0].forEach((e, i) => {
-                if (bon) return
-                if (e[2] > cou[2]) {
-                    EDT[0].splice(i, 0, cou);
-                    bon = true
-                }
-            });
-            if (bon == false) {
-                EDT[0].push(cou)
-            }
 
-        })
-        vendrediAMrtrre.forEach(cou => {
-            let bon = false;
-            // console.log(cou)
-            EDT[4].forEach((e, i) => {
-                if (bon) return
-                if (e[2] > cou[2]) {
-                    EDT[4].splice(i, 0, cou);
-                    bon = true
-                }
-            });
-            if (bon == false) {
-                EDT[4].push(cou)
-            }
-
-        })
-        let mardi = []
+        // Groupes d'info 
         if (groupeI == 1 || groupeI == "S") {
-            mardi.push([" TP Info", "37", 15, 17,"Info"])
+            mettreSemaine[1].push([" TP Info", "37", 15, 17,"Info"])
         } if (groupeI == 2 || groupeI == "S") {
-            mardi.push(["TP Info", "37", 17, 19, "Info"])
+            mettreSemaine[1].push(["TP Info", "37", 17, 19, "Info"])
         } if (groupeI == 3 || groupeI == "S") {
-            // cas particulier car seule occurence d'un changement d'emplois du temps le mercredi donc obligé d'inclure le passage suivant
-            cou = ["TP Info", "37", 16, 18, "Info"]
-            let bon = false;
-            EDT[2].forEach((e, i) => {
-                if (bon) return
-                if (e[2] > cou[2]) {
-                    EDT[2].splice(i, 0, cou);
-                    bon = true
-                    return
-                }
-            });
-            if (bon == false) {
-                EDT[2].push(cou)
-            }
+            // cas particulier car seule occurence d'un changement d'emplois du temps le mercredi
+            mettreSemaine[2].push(["TP Info", "37", 16, 18, "Info"])
         }
         if (groupeI == "S") alert("Il faut se répartir les groupes d'info !")
-        console.log("STOP", mardi)
-        mardi.forEach(cou => {
-            let bon = false;
-            console.log(cou)
-            structuredClone(EDT[1]).forEach((e, i) => {
-                if (bon) return
-                if (e[2] > cou[2]) {
-                    EDT[1].splice(i, 0, cou);
-                    bon = true
+
+
+        // LV2
+        if ([1, 6, 14, 15, 16].includes(groupeK)){
+            mettreSemaine[3].push(["LV2", "🤷‍♂️", 17, 19, "LV2"])
+        }
+
+        // ajout de tout les cours dans l'EDT au bon endroit
+        for (let jourDeSemaine = 0; jourDeSemaine < 5; jourDeSemaine++) {
+            mettreSemaine[jourDeSemaine].forEach(cou => {
+                let bon = false;
+                // console.log(cou)
+                EDT[jourDeSemaine].forEach((e, i) => {
+                    if (bon) return
+                    if (e[2] > cou[2]) {
+                        EDT[jourDeSemaine].splice(i, 0, cou);
+                        bon = true
+                    }
+                });
+                if (bon == false) {
+                    EDT[jourDeSemaine].push(cou)
                 }
-            });
-            if (bon == false) {
-                EDT[1].push(cou)
-            }
-            console.log("mardi", EDT[1])
 
-        })
+            })
+        }
 
+        // ajout de toutes les kholles dans l'EDT
         const matiere = getKholes((16 - (semaine - 3) + Number(groupeK) - 1) % 16 + 1, (semaine - 3));
         matiere.forEach(kh => {
             let bon = false;
