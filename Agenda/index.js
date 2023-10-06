@@ -6,7 +6,7 @@ async function getText(url) {
 
 
 ;(async() => {
-    let generalText = getText("https://pages.mp2iciv.fr/Agenda/agenda.txt");
+    let generalText = getText("https://guillaume-favier.github.io/agendaMP2I/agenda.txt");
     let big = document.createElement("ul")
     let cur;
     let sous;
