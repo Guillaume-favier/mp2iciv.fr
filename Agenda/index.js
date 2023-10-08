@@ -63,7 +63,7 @@ async function getJson(url) {
 
         a2.innerText = e.login
         name.appendChild(a2)
-        nb.innerText = e.contributions + " contributions"
+        nb.innerText = e.contributions == 1 ? e.contributions + " contribution" : e.contributions + " contributions"
 
         pfpGithub.appendChild(pfp)
         nameGithub.appendChild(name)
