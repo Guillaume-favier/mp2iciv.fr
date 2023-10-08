@@ -164,7 +164,7 @@ const ajusteDate = (n) => {
 
     let groupeK = selectGrp.value == "" ? 0 : Number(selectGrp.value);
     let groupeI = 0;
-    let semaine = 5;
+    let semaine = 6;
     semaines.value = semaine
     let CKh = 0;
     let kholes = [""]
