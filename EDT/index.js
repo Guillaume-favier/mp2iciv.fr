@@ -494,6 +494,14 @@ const ajusteDate = (n) => {
         resetEDT()
         groupeK = Number(selectGrp.value)
         updateSemaines()
+        if (groupeK == 6){
+            console.log("hein ?")
+            document.body.className = "manchot"
+
+        }
+        else {
+            document.body.className = ""
+        }
 
     }
 
@@ -523,7 +531,7 @@ const ajusteDate = (n) => {
 
         const el = selectGrp.children[i];
         el.innerText += " :  "
-        console.log(el)
+        // console.log(el)
         groupesPers[el.value - 1].forEach(pers => {
             el.innerText += pers[1] + " " + pers[0][0]+". - "
         })
