@@ -499,6 +499,11 @@ const ajusteDate = (n) => {
             document.body.className = "manchot"
 
         }
+        else if (groupeK == 4) {
+            console.log("hein ?")
+            document.body.className = "chateauuu"
+
+        }
         else {
             document.body.className = ""
         }
