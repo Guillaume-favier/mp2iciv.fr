@@ -478,6 +478,7 @@ const ajusteDate = (n) => {
         
         if (testparams() == false) return
         afficheEDT()
+        fromEDTtoIcs(EDT, semaineNom[semaine - 2])
         metNumJours()
         setPallette()
 
