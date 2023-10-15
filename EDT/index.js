@@ -154,6 +154,7 @@ const ajusteDate = (n) => {
     const pallette = await getJson("/EDT/palettes.json")
     const semaineNom = await getJson("/EDT/semaine.json")
     const groupesPers = await getJson("/EDT/groupes.json")
+    const hotfix = await getJson("/EDT/hotfix.json")
     let EDT = structuredClone(orgEDT)
     txt.innerHTML = "Traitement des données ..."
     let tableauInfo = []
@@ -164,7 +165,7 @@ const ajusteDate = (n) => {
 
     let groupeK = selectGrp.value == "" ? 0 : Number(selectGrp.value);
     let groupeI = 0;
-    let semaine = 6;
+    let semaine = 7;
     semaines.value = semaine
     let CKh = 0;
     let kholes = [""]
@@ -370,6 +371,31 @@ const ajusteDate = (n) => {
             }
         });
 
+        // hot fix:
+        Object.keys(hotfix).forEach(jourId => {
+            const s = jourId.split("/")
+            if (Number(s[0]) == semaine) {
+                console.log("Semaine de HOTFIX !")
+                let done = false
+                for (let i = 0; i < hotfix[jourId].length && !done; i++) {
+                    const poss = hotfix[jourId][i];
+                    console.log("cond : ",poss[0])
+                    if (poss[0] == "p" && groupeK % 2 == 0) {
+                        console.log("validée : groupe pair")
+                        EDT[s[1]] = poss[1]
+                        done = true
+                    } else if (poss[0] == "i" && groupeK % 2 == 1) {
+                        console.log("validée : groupe impair")
+                        EDT[s[1]] = poss[1]
+                        done = true
+                    }else if(Number(poss[0]) == groupeK){
+                        console.log("validée : groupe "+groupeK)
+                        EDT[s[1]] = poss[1]
+                        done = true
+                    }
+                }
+            }
+        })
 
     }
 
