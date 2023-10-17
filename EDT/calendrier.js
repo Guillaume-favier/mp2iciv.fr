@@ -44,18 +44,18 @@ const makeIcs = ( targets ) => {
 }
 
 const fromEDTtoIcs = (edt,semaine) => {
-    console.log(edt, semaine)
+    // console.log(edt, semaine)
     const base = semaine.split("/");
     let jours = []
 
     let init = (new Date(Number("20" + base[2]), Number(base[1]) - 1, Number(base[0]))).getTime()
     let start = new Date(init)
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
         jours.push(new Date(init + i * 24 * 3600 * 1000))
     }
 
     let targets = []
-    for (let jour = 0; jour < 5; jour++) {
+    for (let jour = 0; jour < edt.length; jour++) {
         edt[jour].forEach(cours => {
             let date = moment(jours[jour])
             let timeFrom = nombreToHeure2(cours[2])
@@ -69,7 +69,7 @@ const fromEDTtoIcs = (edt,semaine) => {
             })
         })
     }
-    console.log(targets)
+    // console.log(targets)
 
     const res = makeIcs(targets)
     document.getElementById("DownEDT").onclick = () => {

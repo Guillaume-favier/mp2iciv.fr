@@ -228,8 +228,13 @@ const ajusteDate = (n) => {
         txt.appendChild(h1)
 
         const dsP = document.createElement("p")
-        const inputDs = ds[semaine - 2]
-        dsP.innerText = "DS : " + (typeof (inputDs) != "undefined" ? inputDs : "Non défini")
+        let inputDs = ds[semaine - 2]
+        if (inputDs == null) {
+            inputDs = "Pas de DS cette semaine"
+        }else{
+            inputDs = "DS : " + inputDs
+        }
+        dsP.innerText = inputDs
         txt.appendChild(dsP)
         // txt.appendChild(document.createElement("br"))
 
@@ -295,7 +300,7 @@ const ajusteDate = (n) => {
                 else mettreSemaine[0].push(["TD SI", "20", 10, 11,"SI"])
                 n2()
                 
-                console.log(mettreSemaine[0])
+                // console.log(mettreSemaine[0])
             }
         } else {
             if (groupeK % 2 == 1) {
@@ -379,7 +384,7 @@ const ajusteDate = (n) => {
                 let done = false
                 for (let i = 0; i < hotfix[jourId].length && !done; i++) {
                     const poss = hotfix[jourId][i];
-                    console.log("cond : ",poss[0])
+                    // console.log("cond : ",poss[0])
                     if (poss[0] == "p" && groupeK % 2 == 0) {
                         console.log("validée : groupe pair")
                         EDT[s[1]] = poss[1]
@@ -409,8 +414,8 @@ const ajusteDate = (n) => {
 
     const afficheEDT = () => {
         makeEDT()
-        console.log(EDT)
-        console.log("aff")
+        // console.log(EDT)
+        console.log("Affichage de l'emplois du temps")
         resetEDT()
 
         const joursN = ["lundi", "mardi", "mercredi", "jeudi", "vendredi"]
@@ -487,6 +492,7 @@ const ajusteDate = (n) => {
     const updateSemaines = () => {
         let ele = document.getElementById("persGrp");
         ele.innerHTML = ""
+        document.getElementById("DownEDT").onclick = () => {}
         if (groupeK == "") {
             txt.innerText = "Paramètres invalides"
             return
@@ -504,7 +510,18 @@ const ajusteDate = (n) => {
         
         if (testparams() == false) return
         afficheEDT()
-        fromEDTtoIcs(EDT, semaineNom[semaine - 2])
+        const nEDT = JSON.parse(JSON.stringify(EDT)) // Quelle horreur
+        const dsMnt = ds[semaine - 2]
+        // console.log(dsMnt)
+        if (dsMnt != null){
+            // console.log("Il y a un DS")
+            if (dsMnt.endsWith("(en semaine)") == false){
+                // console.log("oui je rajhoute le DS")
+                nEDT.push([["DS de " + dsMnt,"33",8,12]])
+            }
+        }
+        // console.log(nEDT)
+        fromEDTtoIcs(nEDT, semaineNom[semaine - 2])
         metNumJours()
         setPallette()
 
@@ -522,12 +539,12 @@ const ajusteDate = (n) => {
         groupeK = Number(selectGrp.value)
         updateSemaines()
         if (groupeK == 6){
-            console.log("hein ?")
+            // console.log("hein ?")
             document.body.className = "manchot"
 
         }
         else if (groupeK == 4) {
-            console.log("hein ?")
+            // console.log("hein ?")
             document.body.className = "chateauuu"
 
         }
