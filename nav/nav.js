@@ -57,10 +57,12 @@ document.getElementById("dark").onclick = () => {
 }
 applyTheme()
 
+let isPages = true
 ;(async() => {
     const response = await fetch("/loc");
     const u = document.getElementById("url")
     if (response.ok) {
+        isPages = false
         u.innerHTML = '<i class="fa-solid fa-server"></i> '
     }else {
         u.innerHTML = '<i class="fa-solid fa-file"></i> '
