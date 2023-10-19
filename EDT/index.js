@@ -385,6 +385,12 @@ const ajusteDate = (n) => {
                 for (let i = 0; i < hotfix[jourId].length && !done; i++) {
                     const poss = hotfix[jourId][i];
                     // console.log("cond : ",poss[0])
+                    if (poss[0] == "e") {
+                        console.log("validée : tout le monde !")
+                        EDT[s[1]] = poss[1]
+                        console.log(EDT)
+                        done = true
+                    }
                     if (poss[0] == "p" && groupeK % 2 == 0) {
                         console.log("validée : groupe pair")
                         EDT[s[1]] = poss[1]
