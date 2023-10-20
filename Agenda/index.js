@@ -9,6 +9,34 @@ async function getJson(url) {
     return jj
 }
 
+function putLink(text) {
+    const p = document.createElement("p")
+    const preres = text.split("£")
+    // console.log(preres.length,preres)
+    if ((preres.length-1) % 2 == 0) {
+        p.innerText = preres[0]
+        for (let i = 1; i < Math.floor(preres.length / 2)+1; i++) {
+            const now = [preres[2*i-1],preres[2*i]]
+            const a = document.createElement("a")
+            let url = now[0]
+            if(url[0] == "*"){
+                url = "https://guillaume-favier.github.io/agendaMP2I/docs"+url.substring(1)
+            }
+            a.href = url
+            a.innerText = now[1]
+            
+            p.appendChild(a)
+            if (i+1 < Math.floor(preres.length / 2) + 1) {
+                p.appendChild(document.createTextNode(" & "))
+            }
+        }
+
+    }else{
+        p.innerText = text
+    }
+    return p
+}
+
 ;(async() => {
     let generalText = getText("https://guillaume-favier.github.io/agendaMP2I/agenda.txt");
     let big = document.createElement("ul")
@@ -19,12 +47,12 @@ async function getJson(url) {
             return
         } if (e.startsWith("  - ")){
             let li = document.createElement("li")
-            li.innerText = e.substring(4)
+            li.appendChild(putLink(e.substring(4)))
             sous.appendChild(li)
         }
         else if (e.startsWith("- ")) {
             let li = document.createElement("li")
-            li.innerText = e.substring(2)
+            li.appendChild(putLink(e.substring(2)))
             if (e.endsWith(":") || e.endsWith(": ")){
                 let ul = document.createElement("ul")
                 li.appendChild(ul)
@@ -34,6 +62,7 @@ async function getJson(url) {
         }else {
             let li = document.createElement("li")
             li.innerText = e
+            // console.log(e)
             let ul = document.createElement("ul")
             li.appendChild(ul)
             big.append(document.createElement("br"))
