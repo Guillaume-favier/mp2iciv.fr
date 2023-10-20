@@ -23,7 +23,10 @@ function putLink(text) {
                 url = "https://guillaume-favier.github.io/agendaMP2I/docs"+url.substring(1)
             }
             a.href = url
-            a.innerText = now[1]
+            const linkIcon = document.createElement("i")
+            linkIcon.className = "fa-solid fa-link"
+            a.appendChild(linkIcon)
+            a.appendChild(document.createTextNode(now[1]))
             
             p.appendChild(a)
             if (i+1 < Math.floor(preres.length / 2) + 1) {
