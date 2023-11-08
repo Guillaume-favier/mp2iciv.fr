@@ -380,7 +380,7 @@ const ajusteDate = (n) => {
         Object.keys(hotfix).forEach(jourId => {
             const s = jourId.split("/")
             if (Number(s[0]) == semaine) {
-                console.log("Semaine de HOTFIX !")
+                console.log("Semaine de HOTFIX ! jour : " + jours[s[1]])
                 let done = false
                 for (let i = 0; i < hotfix[jourId].length && !done; i++) {
                     const poss = hotfix[jourId][i];
