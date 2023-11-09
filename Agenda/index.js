@@ -41,7 +41,7 @@ function putLink(text) {
 }
 
 ;(async() => {
-    let generalText = getText("test.txt")//getText("https://guillaume-favier.github.io/agendaMP2I/agenda.txt");
+    let generalText = getText("https://guillaume-favier.github.io/agendaMP2I/agenda.txt");
     let big = document.createElement("ul")
     let cur;
     let sous;
