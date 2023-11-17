@@ -262,7 +262,7 @@ const ajusteDate = (n) => {
         return groupeK != 0
     }
 
-    const makeEDT = () => {
+    const makeEDT = (k = groupeK) => {
         EDT = structuredClone(orgEDT)
         const mettreSemaine = [[],[],[],[],[]]
 
@@ -284,7 +284,7 @@ const ajusteDate = (n) => {
         const toCheck = kholes[semaine - 3]
         if (semaine % 2 == 1) {
 
-            if (groupeK % 2 == 1) {
+            if (k % 2 == 1) {
                 if (toCheck == 5) {
                     mettreSemaine[0].push(["TD SI", "20", 10, 11,"SI"])
                 }
@@ -303,7 +303,7 @@ const ajusteDate = (n) => {
                 // console.log(mettreSemaine[0])
             }
         } else {
-            if (groupeK % 2 == 1) {
+            if (k % 2 == 1) {
                 
                 if (toCheck == 6) {
                     mettreSemaine[0].push(["TD SI", "20", 9, 10, "SI"])
@@ -334,7 +334,7 @@ const ajusteDate = (n) => {
 
 
         // LV2
-        if ([1, 6, 14, 15, 16].includes(groupeK)){
+        if ([1, 6, 14, 15, 16].includes(k)){
             mettreSemaine[3].push(["LV2", "🤷‍♂️", 17, 19, "LV2"])
         }
 
@@ -356,9 +356,10 @@ const ajusteDate = (n) => {
 
             })
         }
+        
 
         // ajout de toutes les kholles dans l'EDT
-        const matiere = getKholes((16 - (semaine - 3) + Number(groupeK) - 1) % 16 + 1, (semaine - 3));
+        const matiere = getKholes((16 - (semaine - 3) + Number(k) - 1) % 16 + 1, (semaine - 3));
         matiere.forEach(kh => {
             let bon = false;
             const val = ["Khôlle " + kh[4], kh[3], heureToNombre(kh[2]), heureToNombre(kh[2]) + 1, kh[4]]
@@ -391,16 +392,16 @@ const ajusteDate = (n) => {
                         console.log(EDT)
                         done = true
                     }
-                    if (poss[0] == "p" && groupeK % 2 == 0) {
+                    if (poss[0] == "p" && k % 2 == 0) {
                         console.log("validée : groupe pair")
                         EDT[s[1]] = poss[1]
                         done = true
-                    } else if (poss[0] == "i" && groupeK % 2 == 1) {
+                    } else if (poss[0] == "i" && k % 2 == 1) {
                         console.log("validée : groupe impair")
                         EDT[s[1]] = poss[1]
                         done = true
-                    }else if(Number(poss[0]) == groupeK){
-                        console.log("validée : groupe "+groupeK)
+                    }else if(Number(poss[0]) == k){
+                        console.log("validée : groupe "+k)
                         EDT[s[1]] = poss[1]
                         done = true
                     }
@@ -409,6 +410,20 @@ const ajusteDate = (n) => {
         })
 
     }
+
+    // Ce qui suit ne me sert qu'à extraire rappidement les données de l'EDT pour faire des hotfix.
+    // console.log(groupeK)
+    // const aideHotfix = (j) => {
+    //     let res = []
+    //     for (let i = 1; i < 17; i++) {
+    //         makeEDT(i)
+    //         res.push([i.toString(),EDT[j]])
+    //     }
+    //     makeEDT(groupeK)
+    //     console.log('"'+semaine+'/'+j+'":'+JSON.stringify(res))
+    //     return res
+    // }
+    // console.log(aideHotfix(0))
 
     const resetEDT = () => {
         const copy = document.getElementById("EDT2").cloneNode(true);
