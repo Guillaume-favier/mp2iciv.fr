@@ -78,9 +78,9 @@ const getGrpFromSem = (s) => {
             p2.innerText = "Jeudi " + goodDate(s, 3) + " à 16h30 avec le groupe " + g2[0] + " qui est composé de : " + putName(g2[1])
         }else{
             const g1 = oneGrp(s, 14)
-            p1.innerText = "Vendredi " + goodDate(s, 4) + " 16h avec le groupe " + g1[0] + " qui est composé de : " + putName(g1[1])
+            p1.innerText = "Vendredi " + goodDate(s, 4) + " à 16h avec le groupe " + g1[0] + " qui est composé de : " + putName(g1[1])
             const g2 = oneGrp(s, 9)
-            p2.innerText = "Vendredi " + goodDate(s, 4) + " 17h30 avec le groupe " + g2[0] + " qui est composé de : " + putName(g2[1])
+            p2.innerText = "Vendredi " + goodDate(s, 4) + " à 17h30 avec le groupe " + g2[0] + " qui est composé de : " + putName(g2[1])
         }
 
         document.getElementById("out").appendChild(p1)
