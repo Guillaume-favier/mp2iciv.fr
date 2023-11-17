@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!--     
+███╗   ███╗██████╗ ██████╗ ██╗
+████╗ ████║██╔══██╗╚════██╗██║
+██╔████╔██║██████╔╝ █████╔╝██║
+██║╚██╔╝██║██╔═══╝ ██╔═══╝ ██║
+██║ ╚═╝ ██║██║     ███████╗██║
+╚═╝     ╚═╝╚═╝     ╚══════╝╚═╝
+-->
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/general.css" rel="stylesheet" id="genestyle" />
+    <link rel="icon" type="image/x-icon" href="/logo.ico">
+    <script src="https://kit.fontawesome.com/5bd3a64755.js" crossorigin="anonymous"></script>
+    <link href="/nav/nav.css" rel="stylesheet" />
+    <title>Page proffesseur - MP2I CIV</title>
+</head>
+
+<body>
+    <div class="topnav" id="myTopnav">
+        <a href="/">Accueil</a>
+        <a href="/EDT/">EDT</a>
+        <a href="/Agenda/">Agenda</a>
+        <a href="/ressources/">Ressources</a>
+        <a href="/HOF/">Hall of fame</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <center>
+        <h1 class="beau">Khôlles de français:</h1>
+    </center>
+    <div class="content">
+        <h2>Sélection semaine: <select id="semaine"></select></h2>
+        <h3>Voici les Khôlles pour la semaine <span id="sem"></span>:</h3>
+        <ul id="out"></ul>
+    <div class="footer"><span id="url"></span> sous licence : <a href="https://www.gnu.org/licenses/quick-guide-gplv3.fr.html"><i class="fa-solid fa-scale-balanced"></i> GPL-3.0 </a><i class="fa-solid fa-moon" id="dark"></i> <a href="https://github.com/Guillaume-favier/mp2iciv.fr"><i class="fa-brands fa-github"></i></a></div>
+</body>
+<script src="/nav/nav.js"></script>
+<script src="/prof/index.js"></script>
+</html>
