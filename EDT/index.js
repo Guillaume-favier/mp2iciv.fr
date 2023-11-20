@@ -84,6 +84,11 @@ function getCookie(cname) {
     }
     return "";
 }
+
+function clone(a) {
+    return JSON.parse(JSON.stringify(a));
+}
+
 const heureToNombre = (n) => {
     if (typeof n == typeof 2) return n
     if (n.indexOf("h") > -1) {
@@ -155,7 +160,7 @@ const ajusteDate = (n) => {
     const semaineNom = await getJson("/EDT/semaine.json")
     const groupesPers = await getJson("/EDT/groupes.json")
     const hotfix = await getJson("/EDT/hotfix.json")
-    let EDT = structuredClone(orgEDT)
+    let EDT = clone(orgEDT)
     txt.innerHTML = "Traitement des données ..."
     let tableauInfo = []
     info.split("\n").forEach(lign => {
@@ -263,8 +268,11 @@ const ajusteDate = (n) => {
     }
 
     const makeEDT = (k = groupeK) => {
-        EDT = structuredClone(orgEDT)
-        const mettreSemaine = [[],[],[],[],[]]
+        EDT = []
+        EDT = clone(orgEDT)
+        console.log("init", EDT[0], orgEDT[0])
+        let mettreSemaine = [[],[],[],[],[]]
+        console.log(mettreSemaine)
 
         const n1 = () => {
             mettreSemaine[4].push(["TD Maths", "20", heureToNombre("7h50"), heureToNombre("9h50"),"Maths"])
@@ -281,7 +289,11 @@ const ajusteDate = (n) => {
             mettreSemaine[0].push(["Anglais", "33", 14, 15])
             mettreSemaine[0].push(["TD Physique", "20", 12, 14, "Physique"])
         }
+        for (let i = 0; i < 16; i++) {
+            kholes[i] = (16 - i + Number(k) - 1) % 16 + 1;
+        }
         const toCheck = kholes[semaine - 3]
+        console.log("C", toCheck.toString())
         if (semaine % 2 == 1) {
 
             if (k % 2 == 1) {
@@ -312,7 +324,9 @@ const ajusteDate = (n) => {
 
                 n2()
             } else {
+
                 if (toCheck == 5) {
+                    console.log("ok ?", mettreSemaine[0])
                     mettreSemaine[0].push(["TD SI", "20", 10, 11, "SI"])
                 }
                 else mettreSemaine[0].push(["TD SI", "20", 9, 10, "SI"])
@@ -320,6 +334,7 @@ const ajusteDate = (n) => {
                 n1()
             }
         }
+        // console.log(mettreSemaine[0])
 
         // Groupes d'info 
         if (groupeI == 1 || groupeI == "S") {
@@ -339,11 +354,13 @@ const ajusteDate = (n) => {
         }
 
         // ajout de tout les cours dans l'EDT au bon endroit
+        console.log(mettreSemaine[0])
         for (let jourDeSemaine = 0; jourDeSemaine < 5; jourDeSemaine++) {
             mettreSemaine[jourDeSemaine].forEach(cou => {
                 let bon = false;
                 // console.log(cou)
                 EDT[jourDeSemaine].forEach((e, i) => {
+                    
                     if (bon) return
                     if (e[2] > cou[2]) {
                         EDT[jourDeSemaine].splice(i, 0, cou);
@@ -356,10 +373,14 @@ const ajusteDate = (n) => {
 
             })
         }
+        // console.log("insert mettreSemaine",EDT[0])
+        
+        
         
 
         // ajout de toutes les kholles dans l'EDT
         const matiere = getKholes((16 - (semaine - 3) + Number(k) - 1) % 16 + 1, (semaine - 3));
+        
         matiere.forEach(kh => {
             let bon = false;
             const val = ["Khôlle " + kh[4], kh[3], heureToNombre(kh[2]), heureToNombre(kh[2]) + 1, kh[4]]
@@ -376,6 +397,8 @@ const ajusteDate = (n) => {
                 EDT[kh[1] - 1].push(val)
             }
         });
+        // console.log("après kholles: ",EDT[0])
+        
 
         // hot fix:
         Object.keys(hotfix).forEach(jourId => {
@@ -408,6 +431,8 @@ const ajusteDate = (n) => {
                 }
             }
         })
+        // console.log("mnt : ", EDT[0])
+        return EDT
 
     }
 
@@ -416,8 +441,8 @@ const ajusteDate = (n) => {
     // const aideHotfix = (j) => {
     //     let res = []
     //     for (let i = 1; i < 17; i++) {
-    //         makeEDT(i)
-    //         res.push([i.toString(),EDT[j]])
+    //         let nEDT = makeEDT(i)
+    //         res.push([i.toString(), nEDT[j]])
     //     }
     //     makeEDT(groupeK)
     //     console.log('"'+semaine+'/'+j+'":'+JSON.stringify(res))

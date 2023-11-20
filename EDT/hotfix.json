@@ -129,7 +129,7 @@
         ["SI", "20", 8, 9],
         ["TD SI", "20", 10, 11, "SI"],
         ["TD Physique", "20", 12, 13, "Physique"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["Khôlle Maths", "K34", 15, 16, "Maths"],
         ["EPS", "dehors", 16, 18]
       ]
@@ -139,7 +139,7 @@
       [
         ["SI", "20", 8, 9],
         ["TD SI", "20", 9, 10, "SI"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["TD Physique", "20", 15, 16, "Physique"],
         ["EPS", "dehors", 16, 18]
       ]
@@ -150,7 +150,7 @@
         ["SI", "20", 8, 9],
         ["TD SI", "20", 10, 11, "SI"],
         ["TD Physique", "20", 12, 13, "Physique"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["EPS", "dehors", 16, 18]
       ]
     ],
@@ -160,7 +160,7 @@
         ["SI", "20", 8, 9],
         ["TD SI", "20", 9, 10, "SI"],
         ["Khôlle Physique", "26", 10, 11, "Physique"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["TD Physique", "20", 15, 16, "Physique"],
         ["EPS", "dehors", 16, 18]
       ]
@@ -171,7 +171,7 @@
         ["SI", "20", 8, 9],
         ["TD SI", "20", 10, 11, "SI"],
         ["TD Physique", "20", 12, 13, "Physique"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["EPS", "dehors", 16, 18]
       ]
     ],
@@ -180,7 +180,7 @@
       [
         ["SI", "20", 8, 9],
         ["TD SI", "20", 9, 10, "SI"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["TD Physique", "20", 15, 16, "Physique"],
         ["EPS", "dehors", 16, 18]
       ]
@@ -191,7 +191,7 @@
         ["SI", "20", 8, 9],
         ["TD SI", "20", 10, 11, "SI"],
         ["TD Physique", "20", 12, 13, "Physique"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["EPS", "dehors", 16, 18]
       ]
     ],
@@ -201,7 +201,7 @@
         ["SI", "20", 8, 9],
         ["TD SI", "20", 9, 10, "SI"],
         ["Khôlle Physique", "K25", 10, 11, "Physique"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["TD Physique", "20", 15, 16, "Physique"],
         ["EPS", "dehors", 16, 18]
       ]
@@ -212,7 +212,7 @@
         ["SI", "20", 8, 9],
         ["TD SI", "20", 10, 11, "SI"],
         ["TD Physique", "20", 12, 13, "Physique"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["EPS", "dehors", 16, 18]
       ]
     ],
@@ -221,7 +221,7 @@
       [
         ["SI", "20", 8, 9],
         ["TD SI", "20", 9, 10, "SI"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["TD Physique", "20", 15, 16, "Physique"],
         ["EPS", "dehors", 16, 18]
       ]
@@ -232,7 +232,7 @@
         ["SI", "20", 8, 9],
         ["TD SI", "20", 10, 11, "SI"],
         ["TD Physique", "20", 12, 13, "Physique"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["EPS", "dehors", 16, 18]
       ]
     ],
@@ -240,9 +240,9 @@
       "12",
       [
         ["SI", "20", 8, 9],
-        ["TD SI", "20", 9, 10, "SI"],
         ["Khôlle Physique", "26", 9, 10, "Physique"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["TD SI", "20", 10, 11, "SI"],
+        ["Physique", "33", 13, 15],
         ["TD Physique", "20", 15, 16, "Physique"],
         ["EPS", "dehors", 16, 18]
       ]
@@ -251,9 +251,9 @@
       "13",
       [
         ["SI", "20", 8, 9],
-        ["TD SI", "20", 10, 11, "SI"],
+        ["TD SI", "20", 9, 10, "SI"],
         ["TD Physique", "20", 12, 13, "Physique"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["EPS", "dehors", 16, 18]
       ]
     ],
@@ -262,7 +262,7 @@
       [
         ["SI", "20", 8, 9],
         ["TD SI", "20", 9, 10, "SI"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["TD Physique", "20", 15, 16, "Physique"],
         ["EPS", "dehors", 16, 18]
       ]
@@ -273,7 +273,7 @@
         ["SI", "20", 8, 9],
         ["TD SI", "20", 10, 11, "SI"],
         ["TD Physique", "20", 12, 13, "Physique"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["EPS", "dehors", 16, 18]
       ]
     ],
@@ -283,7 +283,7 @@
         ["SI", "20", 8, 9],
         ["TD SI", "20", 9, 10, "SI"],
         ["Khôlle Physique", "K25", 11, 12, "Physique"],
-        ["Physique", "20", 13, 15, "Physique"],
+        ["Physique", "33", 13, 15],
         ["TD Physique", "20", 15, 16, "Physique"],
         ["EPS", "dehors", 16, 18]
       ]
