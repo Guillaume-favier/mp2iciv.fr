@@ -268,11 +268,13 @@ const ajusteDate = (n) => {
     }
 
     const makeEDT = (k = groupeK) => {
+        groupeI = tableauInfo[k - 1][semaine - 3]
+
         EDT = []
         EDT = clone(orgEDT)
-        console.log("init", EDT[0], orgEDT[0])
+        console.log("init", EDT[1], orgEDT[1])
         let mettreSemaine = [[],[],[],[],[]]
-        console.log(mettreSemaine)
+        console.log(mettreSemaine[1])
 
         const n1 = () => {
             mettreSemaine[4].push(["TD Maths", "20", heureToNombre("7h50"), heureToNombre("9h50"),"Maths"])
@@ -354,7 +356,7 @@ const ajusteDate = (n) => {
         }
 
         // ajout de tout les cours dans l'EDT au bon endroit
-        console.log(mettreSemaine[0])
+        console.log("sem",mettreSemaine[1])
         for (let jourDeSemaine = 0; jourDeSemaine < 5; jourDeSemaine++) {
             mettreSemaine[jourDeSemaine].forEach(cou => {
                 let bon = false;
@@ -431,7 +433,7 @@ const ajusteDate = (n) => {
                 }
             }
         })
-        // console.log("mnt : ", EDT[0])
+        console.log("mnt : ", EDT[1])
         return EDT
 
     }
@@ -441,6 +443,7 @@ const ajusteDate = (n) => {
     // const aideHotfix = (j) => {
     //     let res = []
     //     for (let i = 1; i < 17; i++) {
+    //         console.log(i)
     //         let nEDT = makeEDT(i)
     //         res.push([i.toString(), nEDT[j]])
     //     }
@@ -448,7 +451,7 @@ const ajusteDate = (n) => {
     //     console.log('"'+semaine+'/'+j+'":'+JSON.stringify(res))
     //     return res
     // }
-    // console.log(aideHotfix(0))
+    // console.log(aideHotfix(1))
 
     const resetEDT = () => {
         const copy = document.getElementById("EDT2").cloneNode(true);
