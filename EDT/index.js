@@ -120,8 +120,7 @@ async function getText(url) {
 
 
 var selectGrp = document.getElementById("grpKhole")
-for (let i = 1; i <= 16; i++) {
-
+for (let i = 1; i <= 16; i++) { // affichage primitif pour le choix des groupes
     const opt = document.createElement("option")
     opt.value = i.toString()
     opt.innerText = "G" + i 
@@ -130,7 +129,6 @@ for (let i = 1; i <= 16; i++) {
 
 const cookiegrp = getCookie("GroupeKholle")
 if (cookiegrp == "" || (Number(cookiegrp) < 17 && Number(cookiegrp) > 0)) {
-    // console.log("ah ? " + cookiegrp)
     selectGrp.value = cookiegrp
 } else selectGrp.value = ""
 
@@ -152,17 +150,19 @@ const ajusteDate = (n) => {
 
     var txt = document.getElementById("outTxt")
     txt.innerText = "Chargement des données..."
-    const db = await getJson("/EDT/kholes.json")
-    const ds = await getJson("/EDT/DS.json")
-    const info = await getText("/EDT/info.txt")
-    const orgEDT = await getJson("/EDT/EDT.json")
-    const pallette = await getJson("/EDT/palettes.json")
-    const semaineNom = await getJson("/EDT/semaine.json")
-    const groupesPers = await getJson("/EDT/groupes.json")
-    const hotfix = await getJson("/EDT/hotfix.json")
-    let EDT = clone(orgEDT)
+    const db = await getJson("/EDT/kholes.json")            // document qui répertorie les khôlles
+    const ds = await getJson("/EDT/DS.json")                // document qui répertorie les DS
+    const info = await getText("/EDT/info.txt")             // document qui répertorie la matrice pour les groupes d'informatique
+    const orgEDT = await getJson("/EDT/EDT.json")           // document qui répertorie les les cours communs
+    const pallette = await getJson("/EDT/palettes.json")    // document qui répertorie les pallettes de couleurs
+    const semaineNom = await getJson("/EDT/semaine.json")   // document qui répertorie les dates des lundis de chaques semaines
+    const groupesPers = await getJson("/EDT/groupes.json")  // document qui répertorie le nom des memebres de chaques groupes
+    const hotfix = await getJson("/EDT/hotfix.json")        // document qui répertorie les hotfixs
+    let EDT = clone(orgEDT) // variable qui stocke tout l'EDTA qui sera à consulter
     txt.innerHTML = "Traitement des données ..."
     let tableauInfo = []
+
+    // Traitement des groupes d'infos dans un tableau
     info.split("\n").forEach(lign => {
         tableauInfo.push(lign.split(" "))
     })
@@ -189,22 +189,19 @@ const ajusteDate = (n) => {
             n+=24*3600*1000
         }
         const ElemEDT = document.getElementById("EDT").children[0].children
-        // console.log(ElemEDT)
         for (let i = 0; i < ElemEDT.length; i++) {
             const element = ElemEDT[i];
             element.innerText = j[i]
-            // console.log(element)
         }
-        // console.log(j)
     }
     metNumJours()
 
-    const afficheCours = (m, nom) => {
+    const afficheKholle = (m, nom) => {
         const li = document.createElement("li")
         li.innerText = nom + ", " + m[0] + " le " + jours[m[1]] + " à  " + (typeof m[2] == typeof 2 ? (m[2] + "h") : m[2]) + " en " + m[3]
-        // txt.appendChild(p)
         return li
     }
+    // cette fonction rassemble toute les kholles en respectant le règles spécifiques
     const getKholes = (c, s) => {
         let all = [db["maths"][c - 1].concat(["Maths"])]
 
@@ -223,10 +220,7 @@ const ajusteDate = (n) => {
     }
 
 
-
-
-
-    const afficheSemaine = (c, s) => {
+    const semaineTexte = (c, s) => {
         txt.appendChild(document.createElement("br"))
         const h1 = document.createElement("h1")
         h1.innerText = "Semaine " + (s + 3) + " C" + c
@@ -247,21 +241,22 @@ const ajusteDate = (n) => {
         kholesTexte.innerText = "Kôlles :"
         txt.appendChild(kholesTexte)
         const ul = document.createElement("ul")
-        ul.appendChild(afficheCours(db["maths"][c - 1], "Maths"))
+        ul.appendChild(afficheKholle(db["maths"][c - 1], "Maths"))
         if (c % 2 == 1) {
-            ul.appendChild(afficheCours(db["physique"][c - 1], "Physique"))
+            ul.appendChild(afficheKholle(db["physique"][c - 1], "Physique"))
         } else {
-            ul.appendChild(afficheCours(db["anglais"][c - 1], "Anglais"))
+            ul.appendChild(afficheKholle(db["anglais"][c - 1], "Anglais"))
         }
         if (c == 1 || c == 10) {
-            ul.appendChild(afficheCours(db["info"][c - 1], "Informatique"))
+            ul.appendChild(afficheKholle(db["info"][c - 1], "Informatique"))
         }
         if ((s % 2 == 0 && (c == 2 || c == 5)) || (s % 2 == 1 && (c == 9 || c == 14))) {
             // console.log("test")
-            ul.appendChild(afficheCours(db["francais"][c - 1], "Français"))
+            ul.appendChild(afficheKholle(db["francais"][c - 1], "Français"))
         }
         txt.appendChild(ul)
     }
+
     txt.innerHTML = "Choisir un groupe"
     const testparams = () => {
         return groupeK != 0
@@ -272,97 +267,77 @@ const ajusteDate = (n) => {
 
         EDT = []
         EDT = clone(orgEDT)
-        console.log("init", EDT[1], orgEDT[1])
         let mettreSemaine = [[],[],[],[],[]]
-        console.log(mettreSemaine[1])
+        // on ajoute sans ordre précis les cours kholles et TD à ajouter à l'EDT pour on les remmettra bien dans l'EDT plus tard
 
         const n1 = () => {
-            mettreSemaine[4].push(["TD Maths", "20", heureToNombre("7h50"), heureToNombre("9h50"),"Maths"])
-            mettreSemaine[4].push(["TP Physique", "B214", heureToNombre("9h50"), heureToNombre("11h50"),"Physique"])
-
             mettreSemaine[0].push(["Anglais", "33", 13, 14])
             mettreSemaine[0].push(["TD Physique", "20", 14, 16, "Physique"])
+            mettreSemaine[4].push(["TD Maths", "20", heureToNombre("7h50"), heureToNombre("9h50"),"Maths"])
+            mettreSemaine[4].push(["TP Physique", "B214", heureToNombre("9h50"), heureToNombre("11h50"),"Physique"])
         }
 
         const n2 = () => {
-            mettreSemaine[4].push(["TD Maths", "20", heureToNombre("9h50"), heureToNombre("11h50"), "Maths"])
-            mettreSemaine[4].push(["TP Physique", "B214", heureToNombre("7h50"), heureToNombre("9h50"), "Physique"])
-
             mettreSemaine[0].push(["Anglais", "33", 14, 15])
             mettreSemaine[0].push(["TD Physique", "20", 12, 14, "Physique"])
+            mettreSemaine[4].push(["TD Maths", "20", heureToNombre("9h50"), heureToNombre("11h50"), "Maths"])
+            mettreSemaine[4].push(["TP Physique", "B214", heureToNombre("7h50"), heureToNombre("9h50"), "Physique"])
         }
         for (let i = 0; i < 16; i++) {
             kholes[i] = (16 - i + Number(k) - 1) % 16 + 1;
         }
-        const toCheck = kholes[semaine - 3]
-        console.log("C", toCheck.toString())
+        const semaineC = kholes[semaine - 3]
         if (semaine % 2 == 1) {
-
             if (k % 2 == 1) {
-                if (toCheck == 5) {
+                if (semaineC == 5) {
                     mettreSemaine[0].push(["TD SI", "20", 10, 11,"SI"])
                 }
                 else mettreSemaine[0].push(["TD SI", "20", 9, 10,"SI"])
                 n1()
-                
-
-                
             } else {
-                if (toCheck == 6) {
+                if (semaineC == 6) {
                     mettreSemaine[0].push(["TD SI", "20", 9, 10,"SI"])
                 }
                 else mettreSemaine[0].push(["TD SI", "20", 10, 11,"SI"])
                 n2()
-                
-                // console.log(mettreSemaine[0])
             }
         } else {
             if (k % 2 == 1) {
-                
-                if (toCheck == 6) {
+                if (semaineC == 6) {
                     mettreSemaine[0].push(["TD SI", "20", 9, 10, "SI"])
                 }
                 else mettreSemaine[0].push(["TD SI", "20", 10, 11, "SI"])
-
                 n2()
             } else {
-
-                if (toCheck == 5) {
-                    console.log("ok ?", mettreSemaine[0])
+                if (semaineC == 5) {
                     mettreSemaine[0].push(["TD SI", "20", 10, 11, "SI"])
                 }
                 else mettreSemaine[0].push(["TD SI", "20", 9, 10, "SI"])
-
                 n1()
             }
         }
-        // console.log(mettreSemaine[0])
 
         // Groupes d'info 
         if (groupeI == 1 || groupeI == "S") {
-            mettreSemaine[1].push([" TP Info", "37", 15, 17,"Info"])
+            mettreSemaine[1].push(["TP Info", "37", 15, 17,"Info"])
         } if (groupeI == 2 || groupeI == "S") {
             mettreSemaine[1].push(["TP Info", "37", 17, 19, "Info"])
         } if (groupeI == 3 || groupeI == "S") {
-            // cas particulier car seule occurence d'un changement d'emplois du temps le mercredi
             mettreSemaine[2].push(["TP Info", "37", 16, 18, "Info"])
         }
         if (groupeI == "S") alert("Il faut se répartir les groupes d'info !")
 
 
-        // LV2
+        // goupes de LV2
         if ([1, 6, 14, 15, 16].includes(k)){
             mettreSemaine[3].push(["LV2", "🤷‍♂️", 17, 19, "LV2"])
         }
 
         // ajout de tout les cours dans l'EDT au bon endroit
-        console.log("sem",mettreSemaine[1])
         for (let jourDeSemaine = 0; jourDeSemaine < 5; jourDeSemaine++) {
             mettreSemaine[jourDeSemaine].forEach(cou => {
                 let bon = false;
-                // console.log(cou)
                 EDT[jourDeSemaine].forEach((e, i) => {
-                    
                     if (bon) return
                     if (e[2] > cou[2]) {
                         EDT[jourDeSemaine].splice(i, 0, cou);
@@ -372,21 +347,14 @@ const ajusteDate = (n) => {
                 if (bon == false) {
                     EDT[jourDeSemaine].push(cou)
                 }
-
             })
         }
-        // console.log("insert mettreSemaine",EDT[0])
-        
-        
-        
 
         // ajout de toutes les kholles dans l'EDT
         const matiere = getKholes((16 - (semaine - 3) + Number(k) - 1) % 16 + 1, (semaine - 3));
-        
         matiere.forEach(kh => {
             let bon = false;
             const val = ["Khôlle " + kh[4], kh[3], heureToNombre(kh[2]), heureToNombre(kh[2]) + 1, kh[4]]
-            // console.log(EDT, kh)
             EDT[kh[1] - 1].forEach((e, i) => {
                 if (bon) return
                 if (e[2] > Math.round(heureToNombre(kh[2]))) {
@@ -395,12 +363,9 @@ const ajusteDate = (n) => {
                 }
             })
             if (bon == false) {
-                // console.log("test",val)
                 EDT[kh[1] - 1].push(val)
             }
         });
-        // console.log("après kholles: ",EDT[0])
-        
 
         // hot fix:
         Object.keys(hotfix).forEach(jourId => {
@@ -410,11 +375,10 @@ const ajusteDate = (n) => {
                 let done = false
                 for (let i = 0; i < hotfix[jourId].length && !done; i++) {
                     const poss = hotfix[jourId][i];
-                    // console.log("cond : ",poss[0])
                     if (poss[0] == "e") {
                         console.log("validée : tout le monde !")
                         EDT[s[1]] = poss[1]
-                        console.log(EDT)
+                        // console.log(EDT)
                         done = true
                     }
                     if (poss[0] == "p" && k % 2 == 0) {
@@ -433,7 +397,6 @@ const ajusteDate = (n) => {
                 }
             }
         })
-        console.log("mnt : ", EDT[1])
         return EDT
 
     }
@@ -463,7 +426,6 @@ const ajusteDate = (n) => {
 
     const afficheEDT = () => {
         makeEDT()
-        // console.log(EDT)
         console.log("Affichage de l'emplois du temps")
         resetEDT()
 
@@ -472,7 +434,7 @@ const ajusteDate = (n) => {
         let eEDT = document.getElementById("EDT")
         let last = [8, 8, 8, 8, 8]
         for (let i = 8; i < 20; i++) { // De 8h à 19h
-            let tr = document.createElement("tr") // ligne pour troute la semaine
+            let tr = document.createElement("tr") // ligne pour toute la semaine
 
             const heure = document.createElement("td")
             heure.className = "heure"
@@ -504,10 +466,11 @@ const ajusteDate = (n) => {
                 }
             }
             eEDT.appendChild(tr)
-
         }
-
     }
+
+
+    // affichage pallette
     Object.keys(pallette).forEach(name => {
         const option = document.createElement("option")
         option.value = name
@@ -526,9 +489,7 @@ const ajusteDate = (n) => {
 
         const namePal = palletteElem.value
         const pal = pallette[namePal]
-        if (typeof pal == "undefined" ||pal == null) {
-            return
-        }
+        if (typeof pal == "undefined" || pal == null) return
         Object.keys(pal).forEach(matiere => {
             const mm = document.getElementsByClassName(matiere)
             for (let i = 0; i < mm.length; i++) {
@@ -546,34 +507,36 @@ const ajusteDate = (n) => {
             txt.innerText = "Paramètres invalides"
             return
         }
-        groupeI = tableauInfo[groupeK - 1][semaine - 3]
         if (semaine > 18) semaine = 3
         if (semaine < 3) semaine = 18
         semaines.value = semaine
+
+
+        groupeI = tableauInfo[groupeK - 1][semaine - 3]
         for (let i = 0; i < 16; i++) {
             kholes[i] = (16 - i + Number(groupeK) - 1) % 16 + 1;
         }
         txt.innerHTML = ""
-        afficheSemaine(kholes[semaine - 3], semaine - 3)
+        semaineTexte(kholes[semaine - 3], semaine - 3)
 
         
         if (testparams() == false) return
         afficheEDT()
-        const nEDT = JSON.parse(JSON.stringify(EDT)) // Quelle horreur
+        const nEDT = clone(EDT) // Quelle horreur
         const dsMnt = ds[semaine - 2]
         // console.log(dsMnt)
         if (dsMnt != null){
-            // console.log("Il y a un DS")
             if (dsMnt.endsWith("(en semaine)") == false){
-                // console.log("oui je rajhoute le DS")
+                // ne sera pas affiché mais sera présent sur le calendrier si les gens le dl
                 nEDT.push([["DS de " + dsMnt,"33",8,12]])
             }
         }
-        // console.log(nEDT)
+        
+
         fromEDTtoIcs(nEDT, semaineNom[semaine - 2])
         metNumJours()
         setPallette()
-
+        // affichage des membres du groupe en bas de la page
         let p = document.createElement("p")
         p.innerText = "Personnes du groupe :"
         groupesPers[groupeK - 1].forEach(pers => {
@@ -583,19 +546,15 @@ const ajusteDate = (n) => {
         ele.appendChild(p)
     }
 
-    const changementPourEdt = () => {
+    const changementPourEdt = () => { // fons d'écran spécialisé pour mayeul et évariste
         resetEDT()
         groupeK = Number(selectGrp.value)
         updateSemaines()
         if (groupeK == 6){
-            // console.log("hein ?")
             document.body.className = "manchot"
-
         }
         else if (groupeK == 4) {
-            // console.log("hein ?")
             document.body.className = "chateauuu"
-
         }
         else {
             document.body.className = ""
@@ -625,17 +584,18 @@ const ajusteDate = (n) => {
 
 
     changementPourEdt()
+    // affichage des noms des membres du groupe pour la sélenction
     for (let i = 1; i < selectGrp.children.length; i++) {
 
         const el = selectGrp.children[i];
         el.innerText += " :  "
-        // console.log(el)
         groupesPers[el.value - 1].forEach(pers => {
             el.innerText += pers[1] + " " + pers[0][0]+". - "
         })
         el.innerText = el.innerText.substring(0, el.innerText.length - 2)
         
     }
+
     selectGrp.onchange = e => {
         setCookie("GroupeKholle", e.target.value, 100)
         changementPourEdt()
@@ -644,6 +604,8 @@ const ajusteDate = (n) => {
         setCookie("pallette", palletteElem.value, 100)
         updateSemaines()
     }
+
+    // ajout des dates semaines pour sélection.
     semaines.childNodes.forEach(elem => {
         const base = semaineNom[elem.value - 2].split("/");
 
@@ -652,5 +614,4 @@ const ajusteDate = (n) => {
         let end = new Date(init + 4 * 24 * 3600 * 1000)
         elem.innerText = "n°"+elem.value + " : " +ajusteDate(start.getDate()) + "/" + ajusteDate(start.getMonth() + 1) + " - " + ajusteDate(end.getDate()) + "/" + ajusteDate(end.getMonth() + 1)
     })
-    // setPallette()
 })()
