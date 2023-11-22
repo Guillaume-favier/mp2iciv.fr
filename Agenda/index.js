@@ -95,6 +95,18 @@ function putLink(text) {
         div.appendChild(document.createElement("br"))
         div.appendChild(a2)
         div.appendChild(nb)
+        const comments = {
+            "Guillaume-favier": "Le maitre",
+            "Getoune": "Le sage",
+            "Hamanarca": "Le BG",
+            "NolanGlotin": "Le deuxième"
+        }
+        
+        if (Object.keys(comments).includes(e.login)){
+            const comm = document.createElement("i")
+            comm.innerText = comments[e.login]
+            div.appendChild(comm)
+        }
         table.appendChild(div)
     })
     
