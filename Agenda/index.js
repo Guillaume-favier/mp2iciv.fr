@@ -78,7 +78,7 @@ function putLink(text) {
     const Bdiv = document.getElementById("contrib")
     const table = document.getElementById("listContr")
     let contrib = await getJson("https://api.github.com/repos/Guillaume-favier/agendaMP2I/contributors")
-    contrib.forEach(e => {
+    contrib.forEach((e,i) => {
         const div = document.createElement("div")
         const a = document.createElement("a")
         a.href = e.html_url
@@ -95,11 +95,12 @@ function putLink(text) {
         div.appendChild(document.createElement("br"))
         div.appendChild(a2)
         div.appendChild(nb)
+
         const comments = {
             "Guillaume-favier": "Le maitre",
             "Getoune": "Le sage",
             "Hamanarca": "Le BG",
-            "NolanGlotin": "Le deuxième"
+            "NolanGlotin": "Le "+["premier","deuxième","troisième","quatrième","cinquième","sixième"][i]
         }
         
         if (Object.keys(comments).includes(e.login)){
