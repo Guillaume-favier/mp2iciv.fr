@@ -1,25 +1,32 @@
-table,
-tbody {
-    min-width: 50%;
-}
+
 
 tr {
     width: 100%;
     border: 1px solid black;
-    height: 50px;
+    /* height: 12px; */
+    vertical-align: center;
 }
 
 td {
-    min-height: 15%;
+    height: min-content;
     min-width: 18%;
+}
+.trHeure{
+    height: 7px;
+}
+
+.Fakheure{
+    vertical-align: top;
+    height: 7px;
 }
 
 .heure {
     vertical-align: top;
+    height: 7px;
 }
 
 .cours {
-    height: 50px;
+    /* height: 5px; */
     text-align: center;
     border: 1px solid black;
     color: black;

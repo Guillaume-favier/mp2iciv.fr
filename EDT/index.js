@@ -432,25 +432,32 @@ const ajusteDate = (n) => {
         const joursN = ["lundi", "mardi", "mercredi", "jeudi", "vendredi"]
 
         let eEDT = document.getElementById("EDT")
-        let last = [8, 8, 8, 8, 8]
-        for (let i = 8; i < 20; i++) { // De 8h à 19h
+        let start = 7.75
+        let last = [start, start, start, start]
+        for (let i = start; i < 20; i+=0.25) { // De 8h à 19h
             let tr = document.createElement("tr") // ligne pour toute la semaine
 
             const heure = document.createElement("td")
-            heure.className = "heure"
-            heure.innerText = i + "h" // colonne de gauche des heures
+            tr.className += "trHeure"
+            if (i - Math.floor(i) < 0.01){ // si l'heure est ronde
+                heure.className = "heure"
+                heure.innerText = i + "h" //colonne de gauche des heures
+            }else{
+                heure.className = "Fakheure"
+                heure.innerText = "\n"
+            }
             tr.appendChild(heure)
             for (let jour = 0; jour < 5; jour++) { 
                 let done = false
                 for (let numE = 0; numE < EDT[jour].length; numE++) {
                     const element = EDT[jour][numE];
-                    if (i == Math.round(element[2])) {
+                    if (Math.abs(i - element[2]) < 0.125) {
                         last[jour] = element[3]
                         const coursMatiere = element.length == 4 ? element[0] : element[4]
                         const td = document.createElement("td")
                         td.className = "cours " + coursMatiere
                         td.innerText = element[0] + "\n (" + element[1] + ")\n" + nombreToHeure(element[2]) + " - " + nombreToHeure(element[3])
-                        const n = (element[3] - element[2])
+                        const n = Math.round(4*(element[3] - element[2]))
                         if (n != 1) td.rowSpan = n
                         tr.appendChild(td)
                         break
@@ -459,10 +466,11 @@ const ajusteDate = (n) => {
                     }
                 }
                 if (done == false && last[jour] <= i) {
-                    last[jour]++
+                    last[jour]+=0.25
                     const td = document.createElement("td")
-                    td.innerText = "\n\n\n"
+                    td.innerText = "\n"
                     tr.appendChild(td)
+                    continue
                 }
             }
             eEDT.appendChild(tr)
