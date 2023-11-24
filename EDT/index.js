@@ -434,7 +434,7 @@ const ajusteDate = (n) => {
         let eEDT = document.getElementById("EDT")
         let start = 7.75
         let last = [start, start, start, start]
-        for (let i = start; i < 20; i+=0.25) { // De 8h à 19h
+        for (let i = start; i < 19; i+=0.25) { // De 8h à 19h
             let tr = document.createElement("tr") // ligne pour toute la semaine
 
             const heure = document.createElement("td")

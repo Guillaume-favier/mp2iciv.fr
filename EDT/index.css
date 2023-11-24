@@ -1,28 +1,36 @@
-
+tbody, table{
+    width: 50vw;
+}
 
 tr {
     width: 100%;
     border: 1px solid black;
-    /* height: 12px; */
+    height: 10px;
     vertical-align: center;
 }
 
 td {
     height: min-content;
+    /* height: 9px; */
+    font-size: 0.36vh;
     min-width: 18%;
 }
-.trHeure{
+/* .trHeure{
+
+    font-size: 3vh;
     height: 7px;
-}
+} */
 
 .Fakheure{
     vertical-align: top;
     height: 7px;
+    font-size: 1vh;
 }
 
 .heure {
     vertical-align: top;
-    height: 7px;
+    font-size: 1vh;
+    height: min-content;
 }
 
 .cours {
@@ -30,14 +38,19 @@ td {
     text-align: center;
     border: 1px solid black;
     color: black;
+    height: 7px;
+    font-size: 2vh;
 }
 
 .hid {
     display: none;
 }
-@media screen and (max-width: 600px) {
-    tbody{
-        font-size: 3vw;
+@media screen and (max-width: 1000px) {
+    tbody, table {
+        width: 100%;
+    }
+    .cours {
+        font-size: 1.3vh;
     }
 }
 
