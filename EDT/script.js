@@ -402,19 +402,19 @@ const ajusteDate = (n) => {
     }
 
     // Ce qui suit ne me sert qu'à extraire rappidement les données de l'EDT pour faire des hotfix.
-    // console.log(groupeK)
-    // const aideHotfix = (j) => {
-    //     let res = []
-    //     for (let i = 1; i < 17; i++) {
-    //         console.log(i)
-    //         let nEDT = makeEDT(i)
-    //         res.push([i.toString(), nEDT[j]])
-    //     }
-    //     makeEDT(groupeK)
-    //     console.log('"'+semaine+'/'+j+'":'+JSON.stringify(res))
-    //     return res
-    // }
-    // console.log(aideHotfix(1))
+    console.log(groupeK)
+    const aideHotfix = (j) => {
+        let res = []
+        for (let i = 1; i < 17; i++) {
+            console.log(i)
+            let nEDT = makeEDT(i)
+            res.push([i.toString(), nEDT[j]])
+        }
+        makeEDT(groupeK)
+        console.log('"'+semaine+'/'+j+'":'+JSON.stringify(res))
+        return res
+    }
+    console.log(aideHotfix(3))
 
     const resetEDT = () => {
         const copy = document.getElementById("EDT2").cloneNode(true);
