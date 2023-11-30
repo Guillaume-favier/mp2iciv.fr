@@ -336,6 +336,7 @@ const ajusteDate = (n) => {
         // ajout de tout les cours dans l'EDT au bon endroit
         for (let jourDeSemaine = 0; jourDeSemaine < 5; jourDeSemaine++) {
             mettreSemaine[jourDeSemaine].forEach(cou => {
+                console.log(cou)
                 let bon = false;
                 EDT[jourDeSemaine].forEach((e, i) => {
                     if (bon) return
@@ -397,6 +398,7 @@ const ajusteDate = (n) => {
                 }
             }
         })
+        console.log(EDT)
         return EDT
 
     }
@@ -451,7 +453,7 @@ const ajusteDate = (n) => {
                 let done = false
                 for (let numE = 0; numE < EDT[jour].length; numE++) {
                     const element = EDT[jour][numE];
-                    if (Math.abs(i - element[2]) < 0.075) {
+                    if (Math.abs(i - element[2]) < 0.125) {
                         last[jour] = element[3]
                         const coursMatiere = element.length == 4 ? element[0] : element[4]
                         const td = document.createElement("td")
