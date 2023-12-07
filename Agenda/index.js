@@ -100,7 +100,8 @@ function putLink(text) {
             "Guillaume-favier": "Le maitre",
             "Getoune": "Le sage",
             "Hamanarca": "Le BG",
-            "NolanGlotin": "Le "+["premier","deuxième","troisième","quatrième","cinquième","sixième"][i]
+            "NolanGlotin": "Le majorant",
+            "Bambinexx": "Le chatoman"
         }
         
         if (Object.keys(comments).includes(e.login)){
