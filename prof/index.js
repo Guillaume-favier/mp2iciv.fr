@@ -42,7 +42,7 @@ const getGrpFromSem = (s) => {
     const semaineNom = await getJson("/EDT/semaine.json")
     const groupes = await getJson("/EDT/groupes.json")
 
-    let currSem = 12;
+    let currSem = 13;
     semaines.value = currSem
 
     const oneGrp = (s,c) => {
@@ -81,6 +81,11 @@ const getGrpFromSem = (s) => {
             p1.innerText = "Vendredi " + goodDate(s, 4) + " à 16h avec le groupe " + g1[0] + " qui est composé de : " + putName(g1[1])
             const g2 = oneGrp(s, 9)
             p2.innerText = "Vendredi " + goodDate(s, 4) + " à 17h30 avec le groupe " + g2[0] + " qui est composé de : " + putName(g2[1])
+        }
+
+        if (s == 13) {
+            let p3 = document.createElement("li")
+            p3.innerText = "Il faudra convenir d'une date pour le rattrapage de la semaine 12 avec le groupe 2 potentiellement le vendredi"
         }
 
         document.getElementById("out").appendChild(p1)
