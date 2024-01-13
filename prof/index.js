@@ -42,7 +42,7 @@ const getGrpFromSem = (s) => {
     const semaineNom = await getJson("/EDT/semaine.json")
     const groupes = await getJson("/EDT/groupes.json")
 
-    let currSem = 15;
+    let currSem = 16;
     semaines.value = currSem
 
     const oneGrp = (s,c) => {
